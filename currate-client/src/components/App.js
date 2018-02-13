@@ -5,8 +5,8 @@ import * as actions from '../actions';
 
 import Header from './Header';
 import Landing from './Landing';
-const Dashboard = () => <h1>Dashboard</h1>;
-const SurveyNew = () => <h1>SurveyNew</h1>;
+const Bulletins = () => <h1>Bulletins</h1>;
+const BulletinsNew = () => <h1>BulletinsNew</h1>;
 
 class App extends Component {
   componentDidMount() {
@@ -18,8 +18,8 @@ class App extends Component {
         <div className="container">
           <Route component={Header} />
           <Route exact path="/" component={Landing} />
-          <Route exact path="/surveys" component={Dashboard} />
-          <Route path="/surveys/new" component={SurveyNew} />
+          <Route exact path="/bulletins" component={Bulletins} />
+          <Route path="/bulletins/new" component={BulletinsNew} />
         </div>
       </BrowserRouter>
     );
