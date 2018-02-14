@@ -3,6 +3,11 @@ const requireLogin = require('../middlewares/requireLogin');
 
 const Bulletin = mongoose.model('bulletins');
 module.exports = app => {
+  app.get('/api/bulletins', requireLogin, async (req, res) => {
+    const bulletins = await Bulletin.find();
+    res.send(bulletins);
+  });
+
   app.post('/api/bulletins', requireLogin, (req, res) => {
     const { title, content, date } = req.body;
 

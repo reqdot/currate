@@ -5,8 +5,8 @@ import * as actions from '../actions';
 
 import Header from './Header';
 import Landing from './Landing';
-const Bulletins = () => <h1>Bulletins</h1>;
-const BulletinsNew = () => <h1>BulletinsNew</h1>;
+import Bulletins from './bulletins/Bulletins';
+import BulletinNew from './bulletins/BulletinNew';
 
 class App extends Component {
   componentDidMount() {
@@ -19,7 +19,7 @@ class App extends Component {
           <Route component={Header} />
           <Route exact path="/" component={Landing} />
           <Route exact path="/bulletins" component={Bulletins} />
-          <Route path="/bulletins/new" component={BulletinsNew} />
+          <Route path="/bulletins/new" component={BulletinNew} />
         </div>
       </BrowserRouter>
     );

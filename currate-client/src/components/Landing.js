@@ -8,11 +8,6 @@ class Landing extends Component {
           <h1>Currate</h1>
           Take the newest version info of Curreny rate!
         </div>
-        <div className="fixed-action-btn">
-          <a className="btn-floating btn-large red">
-            <i className="material-icons">add</i>
-          </a>
-        </div>
       </div>
     );
   }
