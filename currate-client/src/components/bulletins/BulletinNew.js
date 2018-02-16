@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import { reduxForm } from 'redux-form';
+import { connect } from 'react-redux';
+import { fetchBulletin } from '../../actions';
 import BulletinForm from './BulletinForm';
 import BulletinFormReview from './BulletinFormReview';
 
@@ -9,6 +11,12 @@ class BulletinNew extends Component {
     this.state = { review: false };
   }
 
+  componentDidMount() {
+    const id = document.location.href.split('/');
+    console.log(id);
+
+    this.props.fetchBulletin(id[5]);
+  }
   renderContent() {
     if (this.state.review) {
       return (
@@ -16,13 +24,23 @@ class BulletinNew extends Component {
       );
     }
     return (
-      <BulletinForm onBulletinSubmit={() => this.setState({ review: true })} />
+      <BulletinForm
+        bulletins={this.props.bulletins}
+        onBulletinSubmit={() => this.setState({ review: true })}
+      />
     );
   }
   render() {
     return <div>{this.renderContent()}</div>;
   }
 }
+
+function mapStateToProps({ bulletins }) {
+  console.log(bulletins);
+  return { bulletins };
+}
+
+BulletinNew = connect(mapStateToProps, { fetchBulletin })(BulletinNew);
 
 export default reduxForm({
   form: 'bulletinForm'

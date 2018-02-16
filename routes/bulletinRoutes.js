@@ -1,3 +1,4 @@
+const _ = require('lodash');
 const mongoose = require('mongoose');
 const requireLogin = require('../middlewares/requireLogin');
 
@@ -6,6 +7,24 @@ module.exports = app => {
   app.get('/api/bulletins', requireLogin, async (req, res) => {
     const bulletins = await Bulletin.find();
     res.send(bulletins);
+  });
+
+  app.get('/api/bulletins/new/:id', async (req, res) => {
+    const id = req.params.id;
+    const bulletin = await Bulletin.findById(id);
+    res.send(bulletin);
+  });
+
+  app.patch('/api/bulletins/new/:id', async (req, res) => {
+    const id = req.params.id;
+    const body = _.pick(req.body, ['title', 'content']);
+
+    const updatedBulletin = await Bulletin.findByIdAndUpdate(
+      id,
+      { $set: body },
+      { new: true }
+    );
+    res.send(updatedBulletin);
   });
 
   app.post('/api/bulletins', requireLogin, (req, res) => {

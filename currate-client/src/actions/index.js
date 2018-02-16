@@ -23,3 +23,14 @@ export const fetchBulletins = () => async dispatch => {
 
   dispatch({ type: FETCH_BULLETINS, payload: res.data });
 };
+
+export const fetchBulletin = id => async dispatch => {
+  const res = await axios.get(`/api/bulletins/new/${id}`);
+  dispatch({ type: FETCH_BULLETINS, payload: res.data });
+};
+
+export const updateBulletin = (id, values) => async dispatch => {
+  const res = await axios.patch(`/api/bulletins/new/${id}`, values);
+  window.location.href = '/bulletins';
+  dispatch({ type: FETCH_BULLETINS, payload: res.data });
+};

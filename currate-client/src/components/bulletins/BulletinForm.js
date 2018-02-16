@@ -1,13 +1,14 @@
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
-import BulletinField from './BulletinField';
 import fieldsData from './fieldsData';
+import BulletinField from './BulletinField';
 
 class BulletinForm extends Component {
   renderFields() {
-    return _.map(fieldsData, ({ label, name }) => {
+    return _.map(fieldsData, ({ name, label }) => {
       return (
         <Field
           key={name}
@@ -23,16 +24,18 @@ class BulletinForm extends Component {
   render() {
     return (
       <div>
-        <form onSubmit={this.props.handleSubmit(this.props.onBulletinSubmit)}>
-          {this.renderFields()}
-          <Link to="/bulletins" className="red btn-flat white-text">
-            Cancel
-          </Link>
-          <button type="submit" className="teal btn-flat right white-text">
-            Next
-            <i className="material-icons right">done</i>
-          </button>
-        </form>
+        <div>
+          <form onSubmit={this.props.handleSubmit(this.props.onBulletinSubmit)}>
+            {this.renderFields()}
+            <Link to="/bulletins" className="red btn-flat white-text">
+              Cancel
+            </Link>
+            <button type="submit" className="teal btn-flat white-text">
+              Next
+              <i className="material-icons right">done</i>
+            </button>
+          </form>
+        </div>
       </div>
     );
   }
@@ -48,6 +51,13 @@ function validate(values) {
   });
   return errors;
 }
+
+function mapStateToProps({ bulletins }) {
+  console.log(bulletins);
+  return { bulletins };
+}
+
+BulletinForm = connect(mapStateToProps)(BulletinForm);
 
 export default reduxForm({
   validate,

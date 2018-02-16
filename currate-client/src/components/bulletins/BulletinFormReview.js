@@ -8,7 +8,9 @@ import * as actions from '../../actions';
 const BulletinFormReview = ({
   onCancel,
   formValues,
+  id,
   submitBulletin,
+  updateBulletin,
   history
 }) => {
   const reviewFields = _.map(fieldsData, ({ name, label }) => {
@@ -28,7 +30,11 @@ const BulletinFormReview = ({
       </button>
       <button
         className="green btn-flat right white-text"
-        onClick={() => submitBulletin(formValues, history)}
+        onClick={
+          id
+            ? () => updateBulletin(id, formValues)
+            : () => submitBulletin(formValues, history)
+        }
       >
         Save Bulletin!
         <i className="material-icons right">done_all</i>
@@ -38,7 +44,11 @@ const BulletinFormReview = ({
 };
 
 function mapStateToProps(state) {
-  return { formValues: state.form.bulletinForm.values };
+  console.log(state);
+  return {
+    formValues: state.form.bulletinForm.values,
+    id: state.bulletins._id
+  };
 }
 
 export default connect(mapStateToProps, actions)(
