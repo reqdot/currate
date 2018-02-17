@@ -36,7 +36,7 @@ module.exports = app => {
       });
   });
 
-  app.get('/api/users/me', (req, res) => {
+  var authenticate = (req, res, next) => {
     const token = req.header('x-auth');
 
     User.findByToken(token)
@@ -44,11 +44,17 @@ module.exports = app => {
         if (!user) {
           return Promise.reject();
         }
-        res.send(user);
+        req.user = user;
+        req.token = token;
+        next();
       })
       .catch(e => {
         res.status(401).send();
       });
+  };
+
+  app.get('/api/users/me', authenticate, (req, res) => {
+    res.send(req.user);
   });
 
   app.get('/api/current_user', (req, res) => {
