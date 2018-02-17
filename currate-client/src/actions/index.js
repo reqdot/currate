@@ -34,3 +34,9 @@ export const updateBulletin = (id, values) => async dispatch => {
   window.location.href = '/bulletins';
   dispatch({ type: FETCH_BULLETINS, payload: res.data });
 };
+
+export const deleteBulletin = id => async dispatch => {
+  const res = await axios.delete(`/api/bulletins/new/${id}`, id);
+  window.location.href = '/bulletins';
+  dispatch({ type: FETCH_BULLETINS, payload: res.data });
+};

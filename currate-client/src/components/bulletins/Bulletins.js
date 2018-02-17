@@ -8,7 +8,10 @@ class Bulletins extends Component {
       <div>
         <BulletinList />
         <div className="fixed-action-btn">
-          <Link to="/bulletins/new" className="btn-floating btn-large red">
+          <Link
+            to="/bulletins/new"
+            className="btn-floating right btn-large red"
+          >
             <i className="large material-icons">mode_edit</i>
           </Link>
         </div>

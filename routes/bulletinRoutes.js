@@ -17,14 +17,21 @@ module.exports = app => {
 
   app.patch('/api/bulletins/new/:id', async (req, res) => {
     const id = req.params.id;
+    const date = req.body.date;
     const body = _.pick(req.body, ['title', 'content']);
 
     const updatedBulletin = await Bulletin.findByIdAndUpdate(
       id,
-      { $set: body },
+      { $set: body, date: Date.now() },
       { new: true }
     );
     res.send(updatedBulletin);
+  });
+
+  app.delete('/api/bulletins/new/:id', async (req, res) => {
+    const id = req.params.id;
+    const deleteBulletin = await Bulletin.findByIdAndRemove(id);
+    res.send(deleteBulletin);
   });
 
   app.post('/api/bulletins', requireLogin, (req, res) => {
