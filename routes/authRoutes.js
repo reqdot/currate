@@ -57,6 +57,19 @@ module.exports = app => {
     res.send(req.user);
   });
 
+  app.post('/api/users/login', (req, res) => {
+    const body = _.pick(req.body, ['email', 'password']);
+    User.findByCredentials(body.email, body.password)
+      .then(user => {
+        return user.generateAuthToken().then(token => {
+          res.header('x-auth', token).send(user);
+        });
+      })
+      .catch(e => {
+        res.status(400).send();
+      });
+  });
+
   app.get('/api/current_user', (req, res) => {
     res.send(req.user);
   });
