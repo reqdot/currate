@@ -20,11 +20,14 @@
     "body-parser": "^1.18.2",
     "concurrently": "^3.5.1",
     "cookie-session": "^2.0.0-beta.3",
+    "crypto-js": "^3.1.9-1",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.1.1",
     "lodash": "^4.17.5",
     "mongoose": "^5.0.4",
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
-    "redux-form": "^7.2.3"
+    "redux-form": "^7.2.3",
+    "validator": "^9.4.0"
   }
 }
