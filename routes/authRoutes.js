@@ -1,7 +1,7 @@
 const _ = require('lodash');
 const mongoose = require('mongoose');
-const requireLogin = require('../middlewares/requireLogin');
 const passport = require('passport');
+const requireLogin = require('../middlewares/requireLogin');
 
 const User = mongoose.model('users');
 
@@ -33,6 +33,21 @@ module.exports = app => {
       })
       .catch(e => {
         res.status(400).send(e);
+      });
+  });
+
+  app.get('/api/users/me', (req, res) => {
+    const token = req.header('x-auth');
+
+    User.findByToken(token)
+      .then(user => {
+        if (!user) {
+          return Promise.reject();
+        }
+        res.send(user);
+      })
+      .catch(e => {
+        res.status(401).send();
       });
   });
 
