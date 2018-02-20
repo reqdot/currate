@@ -9,7 +9,6 @@ var userSchema = new Schema({
   googleId: String,
   email: {
     type: String,
-    required: true,
     trim: true,
     minlength: 1,
     unique: true,
@@ -22,18 +21,15 @@ var userSchema = new Schema({
   },
   password: {
     type: String,
-    required: true,
     minlength: 6
   },
   tokens: [
     {
       access: {
-        type: String,
-        required: true
+        type: String
       },
       token: {
-        type: String,
-        required: true
+        type: String
       }
     }
   ]

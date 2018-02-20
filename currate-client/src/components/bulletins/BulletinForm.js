@@ -8,12 +8,12 @@ import * as actions from '../../actions';
 
 class BulletinForm extends Component {
   renderFields() {
-    fieldsData[0].prevalue = this.props.bulletins.title;
-    fieldsData[1].prevalue = this.props.bulletins.content;
+    fieldsData[0].preValue = this.props.bulletins.title;
+    fieldsData[1].preValue = this.props.bulletins.content;
     console.log(fieldsData[0]);
     console.log(fieldsData[1]);
 
-    return _.map(fieldsData, ({ label, name, prevalue }) => {
+    return _.map(fieldsData, ({ label, name, preValue }) => {
       return (
         <Field
           key={name}
@@ -27,7 +27,7 @@ class BulletinForm extends Component {
                 <input
                   {...input}
                   style={{ marginBottom: '5px' }}
-                  placeholder={prevalue}
+                  placeholder={preValue}
                 />
                 <div className="red-text" style={{ marginBottom: '20px' }}>
                   {touched && error}
