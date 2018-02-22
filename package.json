@@ -4,11 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node index.js",
     "client": "npm run start --prefix currate-client",
     "server": "set NODE_ENV=development && nodemon index.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\""
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "heroku-postbuild":
+      "NPM_CONFIG_PRODUCTION=false npm install --prefix currate-client && npm run build --prefix currate-client"
   },
   "engines": {
     "node": "8.9.3",
@@ -19,6 +20,7 @@
   "dependencies": {
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.2",
+    "cheerio": "^1.0.0-rc.2",
     "concurrently": "^3.5.1",
     "cookie-session": "^2.0.0-beta.3",
     "crypto-js": "^3.1.9-1",
@@ -29,6 +31,7 @@
     "passport": "^0.4.0",
     "passport-google-oauth20": "^1.0.0",
     "redux-form": "^7.2.3",
+    "request": "^2.83.0",
     "socket.io": "^2.0.4",
     "validator": "^9.4.0"
   }

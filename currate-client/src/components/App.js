@@ -8,6 +8,7 @@ import Landing from './Landing';
 import Bulletins from './bulletins/Bulletins';
 import BulletinNew from './bulletins/BulletinNew';
 import ChatForm from './chats/ChatsForm';
+import CrawlerForm from './crawler/CrawlerForm';
 
 class App extends Component {
   componentDidMount() {
@@ -22,6 +23,7 @@ class App extends Component {
           <Route exact path="/bulletins" component={Bulletins} />
           <Route path="/bulletins/new" component={BulletinNew} />
           <Route path="/chats" component={ChatForm} />
+          <Route path="/crawler" component={CrawlerForm} />
         </div>
       </BrowserRouter>
     );

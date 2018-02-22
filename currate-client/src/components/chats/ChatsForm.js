@@ -1,33 +1,87 @@
 import React, { Component } from 'react';
-import socketIOClient from 'socket.io-client';
+import io from 'socket.io-client';
 
 class ChatsForm extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+
     this.state = {
-      endpoint: 'http://localhost:5000'
+      username: '',
+      message: '',
+      messages: [],
+      key: 0
+    };
+
+    this.socket = io('localhost:5000');
+
+    this.socket.on('RECEIVE_MESSAGE', function(data) {
+      addMessage(data);
+    });
+
+    const addMessage = data => {
+      this.setState({ key: this.state.key + 1 });
+      this.setState({ messages: [...this.state.messages, data] });
+      console.log(this.state.messages);
+    };
+
+    this.sendMessage = e => {
+      e.preventDefault();
+      this.socket.emit('SEND_MESSAGE', {
+        username: this.state.username,
+        message: this.state.message
+      });
+      this.setState({ message: '' });
     };
   }
 
   render() {
-    const socket = socketIOClient(this.state.endpoint);
-    socket.on('connect', () => {
-      console.log('Connected to server');
-
-      socket.emit('createMessage', {
-        from: 'andrew@example.com',
-        text: 'Hey!!!!'
-      });
-    });
-
-    socket.on('disconnect', () => {
-      console.log('Disconected from server');
-    });
-
-    socket.on('newEmail', email => {
-      console.log('New email', email);
-    });
-    return <div />;
+    return (
+      <div>
+        <div className="row">
+          <div className="col-4">
+            <div className="card">
+              <div className="card-body">
+                <div className="card-title">Global Chat</div>
+                <hr />
+                <div className="messages">
+                  {this.state.messages.map(message => {
+                    return (
+                      <div key={this.state.key}>
+                        {message.username}: {message.message}
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
+              <div className="card-footer">
+                <input
+                  type="text"
+                  placeholder="Username"
+                  value={this.state.username}
+                  onChange={e => this.setState({ username: e.target.value })}
+                  className="form-control"
+                />
+                <br />
+                <input
+                  type="text"
+                  placeholder="Message"
+                  className="form-control"
+                  value={this.state.message}
+                  onChange={e => this.setState({ message: e.target.value })}
+                />
+                <br />
+                <button
+                  onClick={this.sendMessage}
+                  className="btn btn-primay form-control"
+                >
+                  Send
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
   }
 }
 

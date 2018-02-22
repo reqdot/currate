@@ -26,6 +26,7 @@ class BulletinForm extends Component {
                 <label>{label}</label>
                 <input
                   {...input}
+                  type="text"
                   style={{ marginBottom: '5px' }}
                   placeholder={preValue}
                 />
@@ -89,5 +90,6 @@ BulletinForm = connect(mapStateToProps, actions)(BulletinForm);
 export default reduxForm({
   validate,
   form: 'bulletinForm',
+
   destroyOnUnmount: false
 })(BulletinForm);
