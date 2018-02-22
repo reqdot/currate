@@ -12,7 +12,11 @@ class ChatsForm extends Component {
       key: 0
     };
 
-    this.socket = io('localhost:5000');
+    if (process.env.NODE_ENV === 'production') {
+      this.socket = io(process.env.PORT);
+    } else {
+      this.socket = io('localhost:5000');
+    }
 
     this.socket.on('RECEIVE_MESSAGE', function(data) {
       addMessage(data);
@@ -20,6 +24,7 @@ class ChatsForm extends Component {
 
     const addMessage = data => {
       this.setState({ key: this.state.key + 1 });
+
       this.setState({ messages: [...this.state.messages, data] });
       console.log(this.state.messages);
     };
@@ -46,7 +51,7 @@ class ChatsForm extends Component {
                 <div className="messages">
                   {this.state.messages.map(message => {
                     return (
-                      <div key={this.state.key}>
+                      <div key={this.state.key + 1}>
                         {message.username}: {message.message}
                       </div>
                     );
