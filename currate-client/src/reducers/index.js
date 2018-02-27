@@ -8,5 +8,5 @@ export default combineReducers({
   auth: authReducer,
   form: reduxForm,
   bulletins: bulletinsReducer,
-  crawler: crawlerReducer
+  crawlerResults: crawlerReducer
 });

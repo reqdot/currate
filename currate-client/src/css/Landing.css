@@ -1,0 +1,33 @@
+.carousel-caption {
+  text-shadow: 0 0 0.5rem grey;
+}
+
+img {
+  display: block;
+  margin-top: 5px;
+  margin-left: auto;
+  margin-right: auto;
+  border-radius: 50px;
+  width: 97.85%;
+  height: 330px;
+  opacity: 1;
+}
+
+img:hover {
+  opacity: 0.5;
+}
+
+.jumbotron {
+  display: block;
+  padding-top: 48px;
+  margin-left: auto;
+  margin-right: auto;
+  width: 97.3%;
+  height: 350px;
+  opacity: 0.5;
+  background-color: transparent !important;
+}
+
+.jumbotron:hover {
+  opacity: 1;
+}

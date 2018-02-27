@@ -38,39 +38,48 @@ class CrawlerForm extends Component {
 
   render() {
     return (
-      <div className="MainForm">
-        <div className="Instructions">
-          <h2>
-            <Label>Input the website you would like to crawl</Label>
-          </h2>
+      <div>
+        <div className="MainForm">
+          <div className="Instructions">
+            <h2>
+              <Label>Input the website you would like to crawl</Label>
+            </h2>
+          </div>
+          <div className="Input">
+            <form onSubmit={this.handleSubmit}>
+              <FormGroup
+                bsSize="large"
+                validationState={this.getValidationState()}
+              >
+                <FormControl
+                  type="text"
+                  value={this.state.value}
+                  placeholder="e.g. google.com"
+                  onChange={this.handleChange}
+                />
+                <FormControl.Feedback />
+              </FormGroup>
+              <Button
+                bsSize="large"
+                bsStyle="primary"
+                type="submit"
+                onClick={() => fetchUrl(this.state.value)}
+                disabled={!this.state.valid}
+              >
+                Crawl!
+              </Button>
+            </form>
+          </div>
         </div>
-        <div className="Input">
-          <form onSubmit={this.handleSubmit}>
-            <FormGroup
-              bsSize="large"
-              validationState={this.getValidationState()}
-            >
-              <FormControl
-                type="text"
-                value={this.state.value}
-                placeholder="e.g. google.com"
-                onChange={this.handleChange}
-              />
-              <FormControl.Feedback />
-            </FormGroup>
-            <Button
-              bsSize="large"
-              bsStyle="primary"
-              type="submit"
-              onClick={() => fetchUrl(this.state.value)}
-              disabled={!this.state.valid}
-            >
-              Crawl!
-            </Button>
-          </form>
-        </div>
+        <p>Results</p>
+        <div>{this.props.crawlerResults.title}</div>
       </div>
     );
   }
 }
-export default connect(null, { fetchUrl })(CrawlerForm);
+
+function mapStateToProps({ crawlerResults }) {
+  return { crawlerResults };
+}
+
+export default connect(mapStateToProps, { fetchUrl })(CrawlerForm);

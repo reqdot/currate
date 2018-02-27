@@ -8,8 +8,7 @@
     "client": "npm run start --prefix currate-client",
     "server": "set NODE_ENV=development && nodemon index.js",
     "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "heroku-postbuild":
-      "NPM_CONFIG_PRODUCTION=false npm install --prefix currate-client && npm run build --prefix currate-client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix currate-client && npm run build --prefix currate-client"
   },
   "engines": {
     "node": "8.9.3",

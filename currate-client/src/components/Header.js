@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Navbar, NavbarBrand, Nav, NavItem, Button } from 'reactstrap';
+import '../css/Header.css';
 
 class Header extends Component {
   renderContent() {
@@ -9,34 +11,69 @@ class Header extends Component {
         return 'still deciding';
       case false:
         return (
-          <li>
-            <a href="/auth/google">Login with Google</a>
-          </li>
+          <div>
+            <Link to="/intro">
+              <Button color="primary">About us</Button>
+            </Link>
+            <div class="divider" />
+
+            <Button outline color="success">
+              Login with ID
+            </Button>
+            <div class="divider" />
+            <a href="/auth/google">
+              <Button outline color="success">
+                Login with Google
+              </Button>
+            </a>
+          </div>
         );
       default:
         return (
-          <li>
-            <a href="/api/logout">logout</a>
-          </li>
+          <div>
+            <Link to="/intro">
+              <Button color="secondary">About us</Button>
+            </Link>
+            <div class="divider" />
+            <Link to="/bulletins">
+              <Button outline color="secondary">
+                Bulletins
+              </Button>
+            </Link>
+            <div class="divider" />
+            <Link to="/crawler">
+              <Button outline color="secondary">
+                Crawler
+              </Button>
+            </Link>
+            <div class="divider" />
+            <Link to="/chats">
+              <Button color="danger">Chats</Button>
+            </Link>
+            <div class="divider" />
+            <a href="/api/logout">
+              <Button outline color="secondary">
+                Logout
+              </Button>
+            </a>
+          </div>
         );
     }
   }
   render() {
     return (
-      <div>
-        <nav>
-          <div className="nav-wrapper">
-            <Link
-              to={this.props.auth ? '/bulletins' : '/'}
-              className="left brand-logo"
-            >
-              Currate
+      <div className="container">
+        <Navbar color="faded" light expand="md">
+          <NavbarBrand>
+            <Link className="link" to="/">
+              <h1>Currate</h1>
             </Link>
-            <ul className="right hide-on-med-and-down">
-              {this.renderContent()}
-            </ul>
-          </div>
-        </nav>
+          </NavbarBrand>
+
+          <Nav className="ml-auto" navbar>
+            <NavItem>{this.renderContent()}</NavItem>
+          </Nav>
+        </Navbar>
       </div>
     );
   }
