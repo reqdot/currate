@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import { Link } from 'react-router-dom';
 import BulletinList from './BulletinList';
+import { Button } from 'reactstrap';
 
 class Bulletins extends Component {
   render() {
     return (
       <div>
-        <BulletinList />
-        <div className="fixed-action-btn">
-          <Link
-            to="/bulletins/new"
-            className="btn-floating right btn-large red"
-          >
-            <i className="large material-icons">mode_edit</i>
+        <br />
+        <div>
+          <Link to="/bulletins/new">
+            <Button outline color="success" style={{ float: 'right' }}>
+              Write New!
+            </Button>
           </Link>
         </div>
+        <BulletinList />
       </div>
     );
   }

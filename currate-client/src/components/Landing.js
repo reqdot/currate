@@ -120,10 +120,9 @@ class Landing extends Component {
             <p className="lead">
               <p>
                 You know, Currate is the WebLog to talk and discuss everything
-                related to world economy & business, and so on!
+                related to world Economy & Business, and so on!
                 <br />
-                Feel free to analyze, anticipate and RATE the current economic
-                system.
+                Feel free to analyze, anticipate and RATE all about ECONOMY!
               </p>
             </p>
             <hr className="my-2" />
@@ -132,7 +131,7 @@ class Landing extends Component {
               your Weblogs.
             </p>
             <p className="lead">
-              <Link to={'/intro'}>
+              <Link to="/introduction">
                 <Button color="primary">About Currate</Button>
               </Link>
             </p>

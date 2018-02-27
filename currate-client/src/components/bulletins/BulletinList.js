@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchBulletins } from '../../actions';
+import { Card, CardText, CardColumns, Button } from 'reactstrap';
+import '../../css/BulletinList.css';
 
 class BulletinList extends Component {
   componentDidMount() {
@@ -10,28 +12,53 @@ class BulletinList extends Component {
   renderBulletins() {
     return this.props.bulletins.reverse().map(bulletin => {
       return (
-        <div key={bulletin._id}>
-          <a href={`/bulletins/new/${bulletin._id}`}>
-            <div className="card darken-1">
-              <div className="card-content">
-                <span className="card-title">{bulletin.title}</span>
-                <p>{bulletin.content}</p>
-                <p className="right">
-                  date: {new Date(bulletin.date).toLocaleDateString()}
-                </p>
-              </div>
-            </div>
-          </a>
+        <div className="container" key={bulletin._id}>
+          <Card
+            header
+            className={
+              bulletin.title.length % 2 === 0 ? 'bg-info' : 'bg-secondary'
+            }
+            style={{ textAlign: 'left', color: 'white', opacity: '0.8' }}
+          >
+            &nbsp;&nbsp;{bulletin.title}
+          </Card>
+          <Card body outline color="grey">
+            <CardText style={{ color: 'primary' }}>
+              <p className="blockquote">{bulletin.content}</p>
+              <br />
+              <p
+                style={{
+                  textAlign: 'right',
+                  color: 'darkgrey',
+                  fontSize: 'medium'
+                }}
+              >
+                Date: {new Date(bulletin.date).toLocaleDateString()}
+              </p>
+            </CardText>
+            <a href={`/bulletins/new/${bulletin._id}`}>
+              <Button style={{ float: 'right', color: 'skyblue' }}>
+                Modify
+              </Button>
+            </a>
+          </Card>
+          <hr />
         </div>
       );
     });
   }
-
   render() {
-    return <div>{this.renderBulletins()}</div>;
+    return (
+      <div>
+        <br />
+        <br />
+        <CardColumns className="container">
+          {this.renderBulletins()}
+        </CardColumns>
+      </div>
+    );
   }
 }
-
 function mapStateToProps({ bulletins }) {
   return { bulletins };
 }

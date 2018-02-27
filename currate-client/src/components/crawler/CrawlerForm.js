@@ -7,27 +7,16 @@ class CrawlerForm extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      value: '',
-      valid: true
+      value: ''
     };
     this.handleChange = this.handleChange.bind(this);
-    this.getValidationState = this.getValidationState.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e) {
     this.setState({
-      value: e.target.value,
-      valid: this.getValidationState() === 'success'
+      value: e.target.value
     });
-  }
-
-  getValidationState() {
-    if (this.state.value.length <= 0) return null;
-    //TODO use a lib to validate input as url
-    return this.state.value.match(/((http|https):\/\/www\.)?.+\..+/)
-      ? 'success'
-      : 'error';
   }
 
   handleSubmit(e) {
@@ -36,21 +25,23 @@ class CrawlerForm extends Component {
     e.preventDefault();
   }
 
+  renderResults() {
+    let results = JSON.stringify(this.props.crawlerResults.value);
+    return <div>{results}</div>;
+  }
+
   render() {
     return (
       <div>
         <div className="MainForm">
           <div className="Instructions">
             <h2>
-              <Label>Input the website you would like to crawl</Label>
+              <Label>Input the News keywords you would like to crawl</Label>
             </h2>
           </div>
           <div className="Input">
             <form onSubmit={this.handleSubmit}>
-              <FormGroup
-                bsSize="large"
-                validationState={this.getValidationState()}
-              >
+              <FormGroup bsSize="large">
                 <FormControl
                   type="text"
                   value={this.state.value}
@@ -64,15 +55,15 @@ class CrawlerForm extends Component {
                 bsStyle="primary"
                 type="submit"
                 onClick={() => fetchUrl(this.state.value)}
-                disabled={!this.state.valid}
               >
                 Crawl!
               </Button>
             </form>
           </div>
         </div>
-        <p>Results</p>
-        <div>{this.props.crawlerResults.title}</div>
+        <p style={{ color: 'black', fontSize: 'large' }}>Search Results</p>
+        <hr />
+        <CardColumns className="container">{this.renderResults()}</CardColumns>
       </div>
     );
   }

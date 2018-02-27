@@ -12,8 +12,10 @@ class Header extends Component {
       case false:
         return (
           <div>
-            <Link to="/intro">
-              <Button color="primary">About us</Button>
+            <Link to="/introduction">
+              <Button outline color="secondary">
+                About us
+              </Button>
             </Link>
             <div class="divider" />
 
@@ -31,26 +33,28 @@ class Header extends Component {
       default:
         return (
           <div>
-            <Link to="/intro">
-              <Button color="secondary">About us</Button>
+            <Link to="/introduction">
+              <Button outline color="secondary">
+                About us
+              </Button>
             </Link>
-            <div class="divider" />
+            <div className="divider" />
             <Link to="/bulletins">
               <Button outline color="secondary">
                 Bulletins
               </Button>
             </Link>
-            <div class="divider" />
+            <div className="divider" />
             <Link to="/crawler">
               <Button outline color="secondary">
                 Crawler
               </Button>
             </Link>
-            <div class="divider" />
+            <div className="divider" />
             <Link to="/chats">
               <Button color="danger">Chats</Button>
             </Link>
-            <div class="divider" />
+            <div className="divider" />
             <a href="/api/logout">
               <Button outline color="secondary">
                 Logout
@@ -65,7 +69,7 @@ class Header extends Component {
       <div className="container">
         <Navbar color="faded" light expand="md">
           <NavbarBrand>
-            <Link className="link" to="/">
+            <Link to="/">
               <h1>Currate</h1>
             </Link>
           </NavbarBrand>
