@@ -13,9 +13,7 @@ class Header extends Component {
         return (
           <div>
             <Link to="/introduction">
-              <Button outline color="secondary">
-                About us
-              </Button>
+              <Button color="secondary">About us</Button>
             </Link>
             <div class="divider" />
 
@@ -34,9 +32,7 @@ class Header extends Component {
         return (
           <div>
             <Link to="/introduction">
-              <Button outline color="secondary">
-                About us
-              </Button>
+              <Button color="secondary">About us</Button>
             </Link>
             <div className="divider" />
             <Link to="/bulletins">

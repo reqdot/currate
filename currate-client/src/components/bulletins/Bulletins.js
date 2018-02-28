@@ -10,8 +10,17 @@ class Bulletins extends Component {
         <br />
         <div>
           <Link to="/bulletins/new">
-            <Button outline color="success" style={{ float: 'right' }}>
-              Write New!
+            <Button
+              outline
+              color="success"
+              style={{
+                float: 'right',
+                marginTop: '30px',
+                marginRight: '35px',
+                marginBottom: '40px'
+              }}
+            >
+              ▦ Write New! Create new Weblogs!
             </Button>
           </Link>
         </div>

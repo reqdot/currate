@@ -63,7 +63,7 @@ class CrawlerForm extends Component {
         </div>
         <p style={{ color: 'black', fontSize: 'large' }}>Search Results</p>
         <hr />
-        <CardColumns className="container">{this.renderResults()}</CardColumns>
+        <div>{this.renderResults()}</div>
       </div>
     );
   }
