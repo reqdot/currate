@@ -1,0 +1,51 @@
+.fixed {
+  position: fixed;
+  float: left;
+}
+
+.absolute {
+  position: absolute;
+  top: 120px;
+  right: 0;
+  width: 300px;
+  height: 200px;
+  margin-right: 300px;
+}
+
+.flow {
+  float: right;
+  margin-right: 400px;
+}
+
+.narrow {
+  margin-top: 60px;
+  margin-right: 130px;
+  padding: 10px;
+  border: 1px solid lightgrey;
+  border-style: dashed;
+  border-radius: 5px;
+  display: table;
+  width: 480px;
+  height: 358px;
+}
+
+.breakWord {
+  word-break: break-word;
+}
+
+#username {
+  font-style: oblique;
+}
+
+#message {
+  color: green;
+  font-size: large;
+}
+
+#topButton {
+  position: fixed;
+  bottom: 40px;
+  right: 40px;
+  font-size: x-large;
+  font-weight: bold;
+}

@@ -6,7 +6,6 @@ import { connect } from 'react-redux';
 import { deleteBulletin } from '../../actions';
 import * as actions from '../../actions';
 import { Card, CardBody, CardTitle, Input, Button } from 'reactstrap';
-import { Link } from 'react-router-dom';
 
 class BulletinForm extends Component {
   renderFields() {
@@ -31,7 +30,11 @@ class BulletinForm extends Component {
                   {...input}
                   type="textarea"
                   placeholder={preValue}
-                  style={{ width: '100%' }}
+                  style={{
+                    width: '100%',
+                    height: '100px',
+                    background: 'linear-gradient(#f9efaf, #f7e98d)'
+                  }}
                 />
                 <div style={{ marginBottom: '20px', color: 'red' }}>
                   {touched && error}
@@ -76,12 +79,16 @@ class BulletinForm extends Component {
                 onSubmit={this.props.handleSubmit(this.props.onBulletinSubmit)}
               >
                 {this.renderFields()}
-                <div style={{ float: 'right' }}>
-                  <Link to="/bulletins">
-                    <Button outline color="success">
-                      Back to the list!
-                    </Button>
-                  </Link>
+                <a
+                  style={{
+                    fontSize: 'large',
+                    marginRight: '500px'
+                  }}
+                  href="/bulletins"
+                >
+                  Back to the list!
+                </a>
+                <div style={{ float: 'right', marginTop: '-10px' }}>
                   &nbsp; &nbsp;
                   <Button
                     outline

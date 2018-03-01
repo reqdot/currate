@@ -1,0 +1,27 @@
+html {
+  height: 100%;
+  position: relative;
+}
+
+body {
+  min-height: 100%;
+  position: relative;
+}
+
+.footer {
+  min-height: 100%;
+  padding-bottom: 0px;
+  margin-bottom: 0px;
+}
+
+.footerContainer {
+  position: absolute;
+  padding-bottom: 0px;
+  padding-left: 850px;
+  margin-bottom: 0px;
+  bottom: 0px;
+}
+
+.copyright {
+  text-align: center;
+}

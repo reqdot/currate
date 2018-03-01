@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { fetchBulletins } from '../../actions';
 import { Card, CardText, CardColumns, Button } from 'reactstrap';
+import '../../css/BulletinList.css';
 
 class BulletinList extends Component {
   componentDidMount() {
@@ -39,7 +40,7 @@ class BulletinList extends Component {
               <Button style={{ float: 'right' }}>Modify</Button>
             </a>
           </Card>
-          <hr />
+          <hr style={{ marginTop: '1px' }} />
         </div>
       );
     });
@@ -52,6 +53,9 @@ class BulletinList extends Component {
         <CardColumns className="container">
           {this.renderBulletins()}
         </CardColumns>
+        <div id="topButton">
+          <a href="#top">TOP</a>
+        </div>
       </div>
     );
   }

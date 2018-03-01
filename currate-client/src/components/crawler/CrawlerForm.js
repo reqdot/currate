@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Form, Button, Input } from 'reactstrap';
 import { fetchUrl } from '../../actions';
 import { connect } from 'react-redux';
+import { Card, Form, Button, Input } from 'reactstrap';
+import _ from 'lodash';
+import '../../css/CrawlerForm.css';
 
 class CrawlerForm extends Component {
   constructor(props) {
@@ -26,8 +28,32 @@ class CrawlerForm extends Component {
   }
 
   renderResults() {
-    let results = JSON.stringify(this.props.crawlerResults.value);
-    return <div>{results}</div>;
+    return _.map(this.props.crawlerResults.value, result => {
+      return (
+        <div
+          style={{ width: '90%', marginLeft: '55px', paddingTop: '8px' }}
+          key={result.name}
+        >
+          <Card
+            header
+            className="bg-info"
+            style={{ textAlign: 'left', color: 'white', opacity: '0.7' }}
+          >
+            &nbsp;&nbsp;&nbsp;{result.name}
+          </Card>
+          <Card body outline color="grey">
+            <br />
+            News URL :&nbsp;&nbsp;
+            <a href={result.url}>{result.url}</a>
+            <br />
+            &nbsp;&nbsp;
+            <span className="blockquote">{result.description}</span>
+            <br />
+          </Card>
+          <br />
+        </div>
+      );
+    });
   }
 
   render() {
@@ -55,15 +81,16 @@ class CrawlerForm extends Component {
             >
               <Input
                 type="text"
-                className="form-control"
                 name="term"
+                style={{
+                  background: 'linear-gradient(#f9efaf, #f7e98d)'
+                }}
                 value={this.state.value}
                 placeholder="e.g. currency exchange rate"
                 onChange={this.handleChange}
               />
               <span className="input-group-btn">
                 <Button
-                  className="btn btn-default"
                   color="primary"
                   type="submit"
                   onClick={() => fetchUrl(this.state.value)}
@@ -78,15 +105,18 @@ class CrawlerForm extends Component {
           <br />
           <span
             style={{
-              marginLeft: '34px',
+              marginLeft: '54px',
               color: 'green',
               fontSize: 'x-large'
             }}
           >
             Search Results
           </span>
-          <hr />
+          <hr style={{ width: '90%', paddingRight: '10px' }} />
           <div>{this.renderResults()}</div>
+          <div id="topButton">
+            <a href="#top">TOP</a>
+          </div>
         </div>
       </div>
     );

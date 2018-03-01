@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
 import io from 'socket.io-client';
+import { Button, Input } from 'reactstrap';
+import '../../css/ChatsForm.css';
 
 class ChatsForm extends Component {
   constructor(props) {
@@ -39,50 +41,93 @@ class ChatsForm extends Component {
     };
   }
 
+  scrollToBottom = () => {
+    this.el.scrollIntoView({ behavior: 'smooth' });
+  };
+
+  componentDidMount() {
+    this.scrollToBottom();
+  }
+
+  componentDidUpdate() {
+    this.scrollToBottom();
+  }
+
   render() {
     return (
-      <div>
-        <div className="row">
-          <div className="col-4">
-            <div className="card">
-              <div className="card-body">
-                <div className="card-title">Global Chat</div>
-                <hr />
-                <div className="messages">
-                  {this.state.messages.map(message => {
-                    return (
-                      <div key={this.state.key + 1}>
-                        {message.username}: {message.message}
-                      </div>
-                    );
-                  })}
-                </div>
-              </div>
-              <div className="card-footer">
-                <input
-                  type="text"
-                  placeholder="Username"
-                  value={this.state.username}
-                  onChange={e => this.setState({ username: e.target.value })}
-                  className="form-control"
-                />
-                <br />
-                <input
-                  type="text"
-                  placeholder="Message"
-                  className="form-control"
-                  value={this.state.message}
-                  onChange={e => this.setState({ message: e.target.value })}
-                />
-                <br />
-                <button
-                  onClick={this.sendMessage}
-                  className="btn btn-primay form-control"
-                >
-                  Send
-                </button>
-              </div>
+      <div className="wrapper">
+        <div className="fixed">
+          <div
+            style={{
+              marginTop: '40px',
+              marginLeft: '100px',
+              textAlign: 'left',
+              color: 'darkgrey'
+            }}
+          >
+            <h4>Discuss with other Currater!</h4>
+          </div>
+          <div style={{ paddingTop: '20px' }}>
+            <div>
+              <Input
+                type="text"
+                placeholder="Please enter your Nickname"
+                style={{ width: '100%' }}
+                value={this.state.username}
+                onChange={e => this.setState({ username: e.target.value })}
+              />
+              <br />
+              <Input
+                type="textarea"
+                placeholder="Fire your Message :)"
+                style={{
+                  height: '300px',
+                  width: '100%',
+                  background: 'linear-gradient(#f9efaf, #f7e98d)'
+                }}
+                value={this.state.message}
+                onChange={e => this.setState({ message: e.target.value })}
+              />
+              <br />
+              <Button
+                outline
+                color="danger"
+                style={{ marginLeft: '440px' }}
+                onClick={this.sendMessage}
+              >
+                Fire!
+              </Button>
             </div>
+          </div>
+        </div>
+        <div className="absolute breakWord narrow">
+          <br />
+          <br />
+          <br />
+          <div>
+            <div className="MessageContainer">
+              <div className="MessagesList">
+                {this.state.messages.map(message => {
+                  return (
+                    <div id="chatList" key={this.state.key + 1}>
+                      &nbsp;&nbsp;
+                      <h6 id="username">{message.username}:</h6>
+                      &nbsp;&nbsp;&nbsp;
+                      <span id="message"> {message.message}</span>
+                    </div>
+                  );
+                })}
+              </div>
+              <div
+                style={{ float: 'left', clear: 'both' }}
+                ref={el => {
+                  this.el = el;
+                }}
+              />
+            </div>
+          </div>
+          <div id="topButton">
+            <a href="#top">TOP</a>
           </div>
         </div>
       </div>

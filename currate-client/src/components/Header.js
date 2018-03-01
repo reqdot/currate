@@ -12,11 +12,6 @@ class Header extends Component {
       case false:
         return (
           <div>
-            <Link to="/introduction">
-              <Button color="secondary">About us</Button>
-            </Link>
-            <div class="divider" />
-
             <Button outline color="success">
               Login with ID
             </Button>
@@ -31,13 +26,13 @@ class Header extends Component {
       default:
         return (
           <div>
-            <Link to="/introduction">
-              <Button color="secondary">About us</Button>
+            <Link to="/graphs">
+              <Button color="secondary">Graphs</Button>
             </Link>
             <div className="divider" />
             <Link to="/bulletins">
               <Button outline color="secondary">
-                Bulletins
+                Weblogs
               </Button>
             </Link>
             <div className="divider" />

@@ -6,7 +6,7 @@ import { Button } from 'reactstrap';
 class Bulletins extends Component {
   render() {
     return (
-      <div>
+      <div className="container">
         <br />
         <div>
           <Link to="/bulletins/new">

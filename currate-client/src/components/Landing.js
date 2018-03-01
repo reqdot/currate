@@ -10,6 +10,7 @@ import {
 import currate2 from '../images/currate2.jpg';
 import currate5 from '../images/currate5.jpg';
 import { Link } from 'react-router-dom';
+import Footer from './footer';
 import '../css/Landing.css';
 
 const items = [
@@ -92,6 +93,7 @@ class Landing extends Component {
 
     return (
       <div className="container">
+        <br />
         <Carousel
           activeIndex={activeIndex}
           next={this.next}
@@ -131,12 +133,13 @@ class Landing extends Component {
               your Weblogs.
             </p>
             <p className="lead">
-              <Link to="/introduction">
-                <Button color="primary">About Currate</Button>
+              <Link to="/signup/signupform">
+                <Button color="primary">Join Currate!</Button>
               </Link>
             </p>
           </Jumbotron>
         </div>
+        <Footer />
       </div>
     );
   }
