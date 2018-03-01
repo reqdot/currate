@@ -5,6 +5,8 @@ import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { deleteBulletin } from '../../actions';
 import * as actions from '../../actions';
+import { Card, CardBody, CardTitle, Input, Button } from 'reactstrap';
+import { Link } from 'react-router-dom';
 
 class BulletinForm extends Component {
   renderFields() {
@@ -23,14 +25,15 @@ class BulletinForm extends Component {
           component={({ input, meta: { error, touched } }) => {
             return (
               <div>
-                <label>{label}</label>
-                <input
+                <label style={{ fontSize: 'large' }}>{label}</label>
+                <hr style={{ marginTop: '5px' }} />
+                <Input
                   {...input}
-                  type="text"
-                  style={{ marginBottom: '5px' }}
+                  type="textarea"
                   placeholder={preValue}
+                  style={{ width: '100%' }}
                 />
-                <div className="red-text" style={{ marginBottom: '20px' }}>
+                <div style={{ marginBottom: '20px', color: 'red' }}>
                   {touched && error}
                 </div>
               </div>
@@ -44,26 +47,58 @@ class BulletinForm extends Component {
   render() {
     return (
       <div>
-        <div>
-          <form onSubmit={this.props.handleSubmit(this.props.onBulletinSubmit)}>
-            {this.renderFields()}
-            <a href="/bulletins" className="red btn-flat white-text">
-              Back to the list!
-              <i className="material-icons right">reply</i>
-            </a>
-            <button type="submit" className="teal btn-flat white-text">
-              Next!
-              <i className="material-icons right">done</i>
-            </button>
-          </form>
-          <button
-            onClick={deleteBulletin(this.props.bulletins._id)}
-            className="yellow btn-flat blue-text"
+        <Card
+          style={{
+            width: '80%',
+            marginLeft: '110px',
+            marginTop: '50px'
+          }}
+        >
+          <CardBody
+            style={{
+              marginTop: '-30px',
+              marginLeft: '-320px',
+              marginRight: '50px'
+            }}
           >
-            Delete!
-            <i className="material-icons right">clear</i>
-          </button>
-        </div>
+            <CardTitle
+              style={{
+                marginLeft: '640px',
+                marginTop: '40px',
+                color: 'green'
+              }}
+            >
+              Create New Weblog!
+            </CardTitle>
+
+            <div style={{ marginTop: '-30px' }}>
+              <form
+                onSubmit={this.props.handleSubmit(this.props.onBulletinSubmit)}
+              >
+                {this.renderFields()}
+                <div style={{ float: 'right' }}>
+                  <Link to="/bulletins">
+                    <Button outline color="success">
+                      Back to the list!
+                    </Button>
+                  </Link>
+                  &nbsp; &nbsp;
+                  <Button
+                    outline
+                    color="danger"
+                    onClick={deleteBulletin(this.props.bulletins._id)}
+                  >
+                    Delete!
+                  </Button>
+                  &nbsp; &nbsp;
+                  <Button color="primary" type="submit">
+                    Next!
+                  </Button>
+                </div>
+              </form>
+            </div>
+          </CardBody>
+        </Card>
       </div>
     );
   }

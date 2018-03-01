@@ -4,6 +4,7 @@ import { connect } from 'react-redux';
 import fieldsData from './fieldsData';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
+import { Button, Card, CardBody, CardTitle } from 'reactstrap';
 
 const BulletinFormReview = ({
   onCancel,
@@ -15,30 +16,61 @@ const BulletinFormReview = ({
 }) => {
   const reviewFields = _.map(fieldsData, ({ name, label }) => {
     return (
-      <div key={name}>
-        <label>{label}</label>
-        <div>{formValues[name]}</div>
+      <div style={{ paddingTop: '10px' }} key={name}>
+        <label style={{ fontSize: 'large' }}>{label}</label>
+        <hr style={{ marginTop: '5px' }} />
+        <div style={{ fontSize: 'large' }}>{formValues[name]}</div>
+        <br />
       </div>
     );
   });
 
   return (
     <div>
-      {reviewFields}
-      <button className="yellow darken-3 btn-flat" onClick={onCancel}>
-        Back
-      </button>
-      <button
-        className="green btn-flat right white-text"
-        onClick={
-          id
-            ? () => updateBulletin(id, formValues)
-            : () => submitBulletin(formValues, history)
-        }
+      <Card
+        style={{
+          width: '80%',
+          marginLeft: '110px',
+          marginTop: '50px'
+        }}
       >
-        Save Bulletin!
-        <i className="material-icons right">done_all</i>
-      </button>
+        <CardBody
+          style={{
+            marginTop: '-30px',
+            marginLeft: '-350px',
+            marginRight: '50px'
+          }}
+        >
+          <CardTitle
+            style={{
+              marginLeft: '670px',
+              marginTop: '40px',
+              color: 'green'
+            }}
+          >
+            Review the Content!
+          </CardTitle>
+          <div style={{ paddingLeft: '400px', paddingTop: '10px' }}>
+            {reviewFields}
+          </div>
+          <div style={{ float: 'right' }}>
+            <Button outline color="success" onClick={onCancel}>
+              Back
+            </Button>
+            &nbsp; &nbsp;
+            <Button
+              color="primary"
+              onClick={
+                id
+                  ? () => updateBulletin(id, formValues)
+                  : () => submitBulletin(formValues, history)
+              }
+            >
+              Save Your Weblog!
+            </Button>
+          </div>
+        </CardBody>
+      </Card>
     </div>
   );
 };

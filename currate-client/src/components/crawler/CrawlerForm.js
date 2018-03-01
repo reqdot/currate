@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { FormGroup, FormControl, Button, Label } from 'react-bootstrap';
+import { Form, Button, Input } from 'reactstrap';
 import { fetchUrl } from '../../actions';
 import { connect } from 'react-redux';
 
@@ -33,37 +33,61 @@ class CrawlerForm extends Component {
   render() {
     return (
       <div>
-        <div className="MainForm">
-          <div className="Instructions">
-            <h2>
-              <Label>Input the News keywords you would like to crawl</Label>
-            </h2>
-          </div>
-          <div className="Input">
-            <form onSubmit={this.handleSubmit}>
-              <FormGroup bsSize="large">
-                <FormControl
-                  type="text"
-                  value={this.state.value}
-                  placeholder="e.g. google.com"
-                  onChange={this.handleChange}
-                />
-                <FormControl.Feedback />
-              </FormGroup>
-              <Button
-                bsSize="large"
-                bsStyle="primary"
-                type="submit"
-                onClick={() => fetchUrl(this.state.value)}
-              >
-                Crawl!
-              </Button>
-            </form>
-          </div>
+        <div
+          style={{
+            marginTop: '40px',
+            textAlign: 'center',
+            color: 'darkgrey'
+          }}
+        >
+          <h4>Input the News keywords you would like to crawl</h4>
         </div>
-        <p style={{ color: 'black', fontSize: 'large' }}>Search Results</p>
-        <hr />
-        <div>{this.renderResults()}</div>
+        <div>
+          <Form style={{ paddingTop: '15px' }} onSubmit={this.handleSubmit}>
+            <div
+              className="input-group"
+              style={{
+                width: '75%',
+                paddingLeft: '20px',
+                paddingRight: '100px',
+                marginLeft: '-50px'
+              }}
+            >
+              <Input
+                type="text"
+                className="form-control"
+                name="term"
+                value={this.state.value}
+                placeholder="e.g. currency exchange rate"
+                onChange={this.handleChange}
+              />
+              <span className="input-group-btn">
+                <Button
+                  className="btn btn-default"
+                  color="primary"
+                  type="submit"
+                  onClick={() => fetchUrl(this.state.value)}
+                >
+                  Crawl!
+                </Button>
+              </span>
+            </div>
+          </Form>
+          <br />
+          <br />
+          <br />
+          <span
+            style={{
+              marginLeft: '34px',
+              color: 'green',
+              fontSize: 'x-large'
+            }}
+          >
+            Search Results
+          </span>
+          <hr />
+          <div>{this.renderResults()}</div>
+        </div>
       </div>
     );
   }
