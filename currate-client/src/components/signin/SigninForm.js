@@ -1,22 +1,21 @@
-import signupFieldsData from './signupFieldsData';
-import SignupField from './SignupField';
+import signinFieldsData from './signinFieldsData';
+import SigninField from './SigninField';
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { signupUser } from '../../actions';
+import { signinUser } from '../../actions';
 
 import { Card, CardBody, CardTitle, Button } from 'reactstrap';
 
-class SignupForm extends Component {
+class SigninForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
       email: '',
-      password: '',
-      confirmPassword: ''
+      password: ''
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -30,7 +29,7 @@ class SignupForm extends Component {
   }
 
   renderFields() {
-    return _.map(signupFieldsData, ({ label, name, type }) => {
+    return _.map(signinFieldsData, ({ label, name, type }) => {
       return (
         <Field
           key={name}
@@ -39,21 +38,19 @@ class SignupForm extends Component {
           name={name}
           value={`this.state.${name}`}
           onChange={this.onInputChange}
-          component={SignupField}
+          component={SigninField}
         />
       );
     });
   }
   onFormSubmit(event) {
-    this.props.signupUser({
+    this.props.signinUser({
       email: this.state.email,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword
+      password: this.state.password
     });
     this.setState({
       email: '',
-      password: '',
-      confirmPassword: ''
+      password: ''
     });
   }
   render() {
@@ -65,24 +62,25 @@ class SignupForm extends Component {
           style={{
             width: '80%',
             marginLeft: '110px',
-            marginTop: '30px'
+            marginTop: '50px'
           }}
         >
           <CardBody
             style={{
               marginTop: '-30px',
               marginLeft: '-320px',
-              marginRight: '50px'
+              marginRight: '50px',
+              marginBottom: '20px'
             }}
           >
             <CardTitle
               style={{
-                marginLeft: '620px',
+                marginLeft: '580px',
                 marginTop: '40px',
                 color: 'green'
               }}
             >
-              Be a Currater! Join our trip!
+              Sign in and Share your opinions!
             </CardTitle>
 
             <div style={{ marginTop: '-30px' }}>
@@ -93,15 +91,22 @@ class SignupForm extends Component {
                   color="primary"
                   type="submit"
                   disable={submitting}
-                  style={{ float: 'right', marginRight: '22px' }}
+                  style={{
+                    float: 'right',
+                    marginTop: '5px',
+                    marginRight: '22px'
+                  }}
                 >
-                  Sign up!
+                  Sign in!
                 </Button>
               </form>
-
-              <Link to="/signin/signinform">
-                <Button outline color="success" style={{ marginLeft: '395px' }}>
-                  Login!
+              <Link to="/signup/signupform">
+                <Button
+                  outline
+                  color="success"
+                  style={{ marginTop: '5px', marginLeft: '396px' }}
+                >
+                  Sign up!
                 </Button>
               </Link>
             </div>
@@ -117,26 +122,20 @@ function validate(values) {
   if (!values.email) {
     errors.email = 'Required';
   } else if (!/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,4}$/i.test(values.email)) {
-    errors.email = 'Invalid email address';
+    errors.email = 'Please enter your email';
   }
   if (!values.password) {
     errors.password = 'Required';
   } else if (values.password.length < 8) {
-    errors.password = 'Please enter your password at least 8 characters';
+    errors.password = 'Please enter the correct password';
   }
-  if (!values.confirmPassword) {
-    errors.confirmPassword = 'Required';
-  } else if (values.confirmPassword.length < 8) {
-    errors.confirmPassword = 'Please enter your password at least 8 characters';
-  } else if (values.confirmPassword !== values.password) {
-    errors.confirmPassword = 'Please check your password';
-  }
+
   return errors;
 }
 
-SignupForm = connect(null, { signupUser })(SignupForm);
+SigninForm = connect(null, { signinUser })(SigninForm);
 
 export default reduxForm({
-  form: 'singupForm',
+  form: 'signinForm',
   validate
-})(SignupForm);
+})(SigninForm);

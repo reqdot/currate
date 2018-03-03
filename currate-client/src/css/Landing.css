@@ -1,15 +1,3 @@
-.carousel {
-  width: 50%;
-  height: 50%;
-  transition: width 1s, height 2s;
-  transition-duration: 2s;
-}
-
-.carousel:hover {
-  width: 100%;
-  height: 100%;
-}
-
 .carousel-caption {
   text-shadow: 0 0 0.5rem grey;
 }

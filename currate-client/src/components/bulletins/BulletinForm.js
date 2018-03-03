@@ -1,4 +1,4 @@
-import fieldsData from './fieldsData';
+import bulletinFieldsData from './bulletinFieldsData';
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
@@ -9,12 +9,12 @@ import { Card, CardBody, CardTitle, Input, Button } from 'reactstrap';
 
 class BulletinForm extends Component {
   renderFields() {
-    fieldsData[0].preValue = this.props.bulletins.title;
-    fieldsData[1].preValue = this.props.bulletins.content;
-    console.log(fieldsData[0]);
-    console.log(fieldsData[1]);
+    bulletinFieldsData[0].preValue = this.props.bulletins.title;
+    bulletinFieldsData[1].preValue = this.props.bulletins.content;
+    console.log(bulletinFieldsData[0]);
+    console.log(bulletinFieldsData[1]);
 
-    return _.map(fieldsData, ({ label, name, preValue }) => {
+    return _.map(bulletinFieldsData, ({ label, name, preValue }) => {
       return (
         <Field
           key={name}
@@ -24,6 +24,7 @@ class BulletinForm extends Component {
           component={({ input, meta: { error, touched } }) => {
             return (
               <div>
+                <input type="hidden" value={this.props.bulletins.id} />
                 <label style={{ fontSize: 'large' }}>{label}</label>
                 <hr style={{ marginTop: '5px' }} />
                 <Input
@@ -47,6 +48,23 @@ class BulletinForm extends Component {
     });
   }
 
+  renderButton() {
+    if (this.props.bulletins._id) {
+      return (
+        <div>
+          <Button
+            outline
+            color="danger"
+            style={{ float: 'left' }}
+            onClick={deleteBulletin(this.props.bulletins._id)}
+          >
+            Delete!
+          </Button>
+        </div>
+      );
+    }
+  }
+
   render() {
     return (
       <div>
@@ -54,7 +72,7 @@ class BulletinForm extends Component {
           style={{
             width: '80%',
             marginLeft: '110px',
-            marginTop: '50px'
+            marginTop: '30px'
           }}
         >
           <CardBody
@@ -88,17 +106,14 @@ class BulletinForm extends Component {
                 >
                   Back to the list!
                 </a>
-                <div style={{ float: 'right', marginTop: '-10px' }}>
+                <div style={{ marginLeft: '590px', marginTop: '-10px' }}>
+                  {this.renderButton()}
                   &nbsp; &nbsp;
                   <Button
-                    outline
-                    color="danger"
-                    onClick={deleteBulletin(this.props.bulletins._id)}
+                    color="primary"
+                    type="submit"
+                    style={{ float: 'right' }}
                   >
-                    Delete!
-                  </Button>
-                  &nbsp; &nbsp;
-                  <Button color="primary" type="submit">
                     Next!
                   </Button>
                 </div>
@@ -114,7 +129,7 @@ class BulletinForm extends Component {
 function validate(values) {
   const errors = {};
 
-  _.each(fieldsData, ({ name }) => {
+  _.each(bulletinFieldsData, ({ name }) => {
     if (!values[name]) {
       errors[name] = `You must provide a ${name}`;
     }

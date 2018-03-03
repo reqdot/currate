@@ -1,7 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
-import fieldsData from './fieldsData';
+import bulletinFieldsData from './bulletinFieldsData';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
 import { Button, Card, CardBody, CardTitle } from 'reactstrap';
@@ -14,7 +14,7 @@ const BulletinFormReview = ({
   updateBulletin,
   history
 }) => {
-  const reviewFields = _.map(fieldsData, ({ name, label }) => {
+  const reviewFields = _.map(bulletinFieldsData, ({ name, label }) => {
     return (
       <div style={{ paddingTop: '10px' }} key={name}>
         <label style={{ fontSize: 'large' }}>{label}</label>

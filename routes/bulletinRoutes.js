@@ -40,7 +40,7 @@ module.exports = app => {
     const bulletin = new Bulletin({
       title,
       content,
-      _user: req.user.id,
+      id: req.user.id,
       date: Date.now()
     });
 

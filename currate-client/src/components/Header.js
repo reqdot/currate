@@ -13,9 +13,9 @@ class Header extends Component {
         return (
           <div>
             <Button outline color="success">
-              Login with ID
+              <Link to="/signin/signinForm">Login with ID</Link>
             </Button>
-            <div class="divider" />
+            <div className="divider" />
             <a href="/auth/google">
               <Button outline color="success">
                 Login with Google
@@ -26,10 +26,6 @@ class Header extends Component {
       default:
         return (
           <div>
-            <Link to="/graphs">
-              <Button color="secondary">Graphs</Button>
-            </Link>
-            <div className="divider" />
             <Link to="/bulletins">
               <Button outline color="secondary">
                 Weblogs

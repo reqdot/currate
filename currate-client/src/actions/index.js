@@ -12,6 +12,30 @@ export const fetchUser = () => async dispatch => {
   });
 };
 
+export const signupUser = userInfo => async dispatch => {
+  console.log('action user:', userInfo);
+  const res = await axios.post('/api/users', userInfo);
+
+  window.location.href = '/signin/signinform';
+
+  dispatch({
+    type: FETCH_USER,
+    payload: res.data
+  });
+};
+
+export const signinUser = userInfo => async dispatch => {
+  console.log('action signinuser:', userInfo);
+  const res = await axios.post('/api/users/signin', userInfo);
+
+  window.location.href = '/bulletins';
+
+  dispatch({
+    type: FETCH_USER,
+    payload: res.data
+  });
+};
+
 export const fetchUrl = url => async dispatch => {
   const res = await axios.get(`/api/crawler?url=${url}`);
 

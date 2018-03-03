@@ -12,7 +12,7 @@ class BulletinList extends Component {
   renderBulletins() {
     return this.props.bulletins.reverse().map(bulletin => {
       return (
-        <div className="container" key={bulletin._id}>
+        <div className="container" key={bulletin.date}>
           <Card
             header
             className={

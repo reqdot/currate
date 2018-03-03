@@ -57,7 +57,7 @@ module.exports = app => {
     res.send(req.user);
   });
 
-  app.post('/api/users/login', (req, res) => {
+  app.post('/api/users/signin', (req, res) => {
     const body = _.pick(req.body, ['email', 'password']);
     User.findByCredentials(body.email, body.password)
       .then(user => {

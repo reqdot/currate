@@ -21,7 +21,7 @@ var userSchema = new Schema({
   },
   password: {
     type: String,
-    minlength: 6
+    minlength: 8
   },
   tokens: [
     {

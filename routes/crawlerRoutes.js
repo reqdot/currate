@@ -3,12 +3,13 @@ let https = require('https');
 const mongoose = require('mongoose');
 const request = require('request');
 const cheerio = require('cheerio');
+const requireLogin = require('../middlewares/requireLogin');
 let subscriptionKey = '00f1ca2222b24c96a3023a955cd9f6fb';
 let host = 'api.cognitive.microsoft.com';
 let path = '/bing/v7.0/news/search';
 
 module.exports = app => {
-  app.get('/api/crawler', (req, res) => {
+  app.get('/api/crawler', requireLogin, (req, res) => {
     console.log('routes url:', req.query.url);
     let term = req.query.url;
 
