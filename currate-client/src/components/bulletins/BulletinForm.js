@@ -11,8 +11,6 @@ class BulletinForm extends Component {
   renderFields() {
     bulletinFieldsData[0].preValue = this.props.bulletins.title;
     bulletinFieldsData[1].preValue = this.props.bulletins.content;
-    console.log(bulletinFieldsData[0]);
-    console.log(bulletinFieldsData[1]);
 
     return _.map(bulletinFieldsData, ({ label, name, preValue }) => {
       return (
@@ -24,13 +22,16 @@ class BulletinForm extends Component {
           component={({ input, meta: { error, touched } }) => {
             return (
               <div>
-                <input type="hidden" value={this.props.bulletins.id} />
                 <label style={{ fontSize: 'large' }}>{label}</label>
                 <hr style={{ marginTop: '5px' }} />
                 <Input
                   {...input}
                   type="textarea"
-                  placeholder={preValue}
+                  placeholder={
+                    label === 'Title'
+                      ? this.props.bulletins.title
+                      : this.props.bulletins.content
+                  }
                   style={{
                     width: '100%',
                     height: '100px',
