@@ -1,17 +1,19 @@
 const _ = require('lodash');
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 const requireLogin = require('../middlewares/requireLogin');
+
 
 const Bulletin = mongoose.model('bulletins');
 module.exports = app => {
-  app.get('/api/bulletins', requireLogin, async (req, res) => {
+  app.get('/api/bulletins', requireLogin, async(req, res) => {
     const bulletins = await Bulletin.find();
     res.send(bulletins);
   });
 
   app.get('/api/bulletins/new/:id', async (req, res) => {
     const id = req.params.id;
-    const bulletin = await Bulletin.findById(id);
+    const bulletin = await Bulletin.findById(new ObjectId(id));
     res.send(bulletin);
   });
 
@@ -21,7 +23,7 @@ module.exports = app => {
     const body = _.pick(req.body, ['title', 'content']);
 
     const updatedBulletin = await Bulletin.findByIdAndUpdate(
-      id,
+      { _id: new ObjectId(id)},
       { $set: body, date: Date.now() },
       { new: true }
     );
@@ -30,17 +32,16 @@ module.exports = app => {
 
   app.delete('/api/bulletins/new/:id', async (req, res) => {
     const id = req.params.id;
-    const deleteBulletin = await Bulletin.findByIdAndRemove(id);
+    const deleteBulletin = await Bulletin.findByIdAndRemove(new ObjectId(id));
     res.send(deleteBulletin);
   });
 
   app.post('/api/bulletins', requireLogin, (req, res) => {
     const { title, content, date } = req.body;
-
     const bulletin = new Bulletin({
       title,
       content,
-      id: req.user.id,
+      _user: req.user.id,
       date: Date.now()
     });
 

@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const bulletinSchema = new Schema({
+var bulletinSchema = new Schema({
   title: String,
   content: String,
   date: Date,

@@ -16,6 +16,7 @@ import SigninForm from './signin/SigninForm';
 class App extends Component {
   componentDidMount() {
     this.props.fetchUser();
+    this.props.fetchUser2();
   }
 
   render() {

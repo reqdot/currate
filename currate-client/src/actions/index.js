@@ -12,6 +12,15 @@ export const fetchUser = () => async dispatch => {
   });
 };
 
+export const fetchUser2 = () => async dispatch => {
+  const res = await axios.get('/api/users/me');
+
+  dispatch({
+    type: FETCH_USER,
+    payload: res.data
+  });
+};
+
 export const signupUser = userInfo => async dispatch => {
   console.log('action user:', userInfo);
   const res = await axios.post('/api/users', userInfo);
@@ -28,7 +37,6 @@ export const signinUser = userInfo => async dispatch => {
   console.log('action signinuser:', userInfo);
   const res = await axios.post('/api/users/signin', userInfo);
 
-  window.location.href = '/bulletins';
 
   dispatch({
     type: FETCH_USER,

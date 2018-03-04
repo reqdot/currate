@@ -1,6 +1,7 @@
 const http = require('http');
 const express = require('express');
 const socketIO = require('socket.io');
+const path = require('path');
 
 const mongoose = require('mongoose');
 const cookieSession = require('cookie-session');
@@ -42,15 +43,16 @@ io.on('connection', socket => {
     io.emit('RECEIVE_MESSAGE', data);
   });
 });
+
 if (process.env.NODE_ENV === 'production') {
   app.use(express.static('currate-client/build'));
-  const path = require('path');
   app.get('*', (req, res) => {
     res.sendFile(
       path.resolve(__dirname, 'currate-client', 'build', 'index.html')
     );
   });
 }
+
 server.listen(PORT, () => {
   console.log(`The server is up on port ${PORT}`);
 });

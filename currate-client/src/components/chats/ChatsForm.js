@@ -35,7 +35,8 @@ class ChatsForm extends Component {
       e.preventDefault();
       this.socket.emit('SEND_MESSAGE', {
         username: this.state.username,
-        message: this.state.message
+        message: this.state.message,
+        key: this.state.key
       });
       this.setState({ message: '' });
     };
@@ -109,7 +110,7 @@ class ChatsForm extends Component {
               <div className="MessagesList">
                 {this.state.messages.map(message => {
                   return (
-                    <div id="chatList" key={this.state.key + 1}>
+                    <div id="chatList" key={message.key}>
                       &nbsp;&nbsp;
                       <h6 id="username">{message.username}:</h6>
                       &nbsp;&nbsp;&nbsp;

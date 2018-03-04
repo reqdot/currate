@@ -9,10 +9,7 @@ import { Card, CardBody, CardTitle, Input, Button } from 'reactstrap';
 
 class BulletinForm extends Component {
   renderFields() {
-    bulletinFieldsData[0].preValue = this.props.bulletins.title;
-    bulletinFieldsData[1].preValue = this.props.bulletins.content;
-
-    return _.map(bulletinFieldsData, ({ label, name, preValue }) => {
+      return _.map(bulletinFieldsData, ({ label, name }) => {
       return (
         <Field
           key={name}
