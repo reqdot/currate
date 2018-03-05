@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from 'reactstrap';
 
-export default ({ input, label, type, name, meta: { error, touched } }) => {
+export default ({ input, label, type,  meta: { error, touched } }) => {
   console.log(type);
   return (
     <div>
@@ -10,7 +10,7 @@ export default ({ input, label, type, name, meta: { error, touched } }) => {
       <Input
         {...input}
         type={type}
-        placeholder={'Please enter your' + name}
+        placeholder={'Please enter your ' + type}
         style={{
           width: '94%',
           marginLeft: '24px',

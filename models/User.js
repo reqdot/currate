@@ -36,15 +36,15 @@ var userSchema = new Schema({
 });
 
 userSchema.methods.toJSON = function() {
-  const user = this;
-  const userObject = user.toObject();
+  var user = this;
+  var userObject = user.toObject();
   return _.pick(userObject, ['_id', 'email']);
 };
 
 userSchema.methods.generateAuthToken = function() {
-  const user = this;
-  const access = 'auth';
-  const token = jwt
+  var user = this;
+  var access = 'auth';
+  var token = jwt
     .sign({ _id: user._id.toHexString(), access }, 'abc123')
     .toString();
 
@@ -56,7 +56,7 @@ userSchema.methods.generateAuthToken = function() {
 };
 
 userSchema.methods.removeToken = function(token) {
-  const user = this;
+  var user = this;
 
   return user.update({
     $pull: {
@@ -68,7 +68,7 @@ userSchema.methods.removeToken = function(token) {
 };
 
 userSchema.statics.findByToken = function(token) {
-  const User = this;
+  var User = this;
   var decoded;
 
   try {
@@ -85,7 +85,7 @@ userSchema.statics.findByToken = function(token) {
 };
 
 userSchema.statics.findByCredentials = function(email, password) {
-  const User = this;
+  var User = this;
   return User.findOne({ email }).then(user => {
     if (!user) {
       return Promise.reject();
@@ -104,7 +104,7 @@ userSchema.statics.findByCredentials = function(email, password) {
 };
 
 userSchema.pre('save', function(next) {
-  const user = this;
+  var user = this;
 
   if (user.isModified('password')) {
     bcrypt.genSalt(10, (err, salt) => {

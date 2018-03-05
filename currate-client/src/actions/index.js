@@ -5,7 +5,6 @@ import { FETCH_URL } from './types';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
-
   dispatch({
     type: FETCH_USER,
     payload: res.data
@@ -14,7 +13,6 @@ export const fetchUser = () => async dispatch => {
 
 export const fetchUser2 = () => async dispatch => {
   const res = await axios.get('/api/users/me');
-
   dispatch({
     type: FETCH_USER,
     payload: res.data
@@ -24,9 +22,7 @@ export const fetchUser2 = () => async dispatch => {
 export const signupUser = userInfo => async dispatch => {
   console.log('action user:', userInfo);
   const res = await axios.post('/api/users', userInfo);
-
   window.location.href = '/signin/signinform';
-
   dispatch({
     type: FETCH_USER,
     payload: res.data
@@ -36,8 +32,6 @@ export const signupUser = userInfo => async dispatch => {
 export const signinUser = userInfo => async dispatch => {
   console.log('action signinuser:', userInfo);
   const res = await axios.post('/api/users/signin', userInfo);
-
-
   dispatch({
     type: FETCH_USER,
     payload: res.data
@@ -46,7 +40,6 @@ export const signinUser = userInfo => async dispatch => {
 
 export const fetchUrl = url => async dispatch => {
   const res = await axios.get(`/api/crawler?url=${url}`);
-
   dispatch({
     type: FETCH_URL,
     payload: res.data
@@ -54,15 +47,14 @@ export const fetchUrl = url => async dispatch => {
 };
 
 export const submitBulletin = (values, history) => async dispatch => {
-  const res = await axios.post('/api/bulletins', values);
+  const res = await axios.post('/api/bulletins/', values);
 
   history.push('/bulletins');
-  dispatch({ type: FETCH_USER, payload: res.data });
+  dispatch({ type: FETCH_BULLETINS, payload: res.data });
 };
 
 export const fetchBulletins = () => async dispatch => {
   const res = await axios.get('/api/bulletins');
-
   dispatch({ type: FETCH_BULLETINS, payload: res.data });
 };
 

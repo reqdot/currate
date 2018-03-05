@@ -3,7 +3,7 @@ const mongoose = require('mongoose');
 const passport = require('passport');
 const requireLogin = require('../middlewares/requireLogin');
 
-const User = mongoose.model('users');
+var User = mongoose.model('users');
 
 module.exports = app => {
   app.get(
@@ -15,13 +15,13 @@ module.exports = app => {
     '/auth/google/callback',
     passport.authenticate('google'),
     (req, res) => {
-      res.redirect('/bulletins');
+      res.redirect('/');
     }
   );
 
   app.post('/api/users', (req, res) => {
-    const body = _.pick(req.body, ['email', 'password']);
-    const user = new User(body);
+    var body = _.pick(req.body, ['email', 'password']);
+    var user = new User(body);
 
     user
       .save()
@@ -37,7 +37,7 @@ module.exports = app => {
   });
 
   const authenticate = (req, res, next) => {
-    const token = req.header('x-auth');
+    var token = req.header('x-auth');
 
     User.findByToken(token)
       .then(user => {
@@ -58,7 +58,7 @@ module.exports = app => {
   });
 
   app.post('/api/users/signin', (req, res) => {
-    const body = _.pick(req.body, ['email', 'password']);
+    var body = _.pick(req.body, ['email', 'password']);
     User.findByCredentials(body.email, body.password)
       .then(user => {
         return user.generateAuthToken().then(token => {

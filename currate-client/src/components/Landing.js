@@ -8,6 +8,7 @@ import {
   CarouselCaption
 } from 'reactstrap';
 import currate2 from '../images/currate2.jpg';
+import currate4 from '../images/currate4.jpeg';
 import currate5 from '../images/currate5.jpg';
 import { Link } from 'react-router-dom';
 import Footer from './footer';
@@ -25,7 +26,12 @@ const items = [
     src: currate5,
     altText: 'Crawling the news!',
     caption: 'You can crawl and save the news!'
-  }
+  },
+  { link: '/bulletins',
+    src: currate4,
+    altText: 'Mark your Weblogs!',
+    caption: 'Contact other opinions!'
+}
 ];
 
 class Landing extends Component {
@@ -92,8 +98,7 @@ class Landing extends Component {
     });
 
     return (
-      <div className="container">
-        <br />
+      <div className="container" style={{marginTop: '15px'}}>
         <Carousel
           activeIndex={activeIndex}
           next={this.next}
@@ -116,7 +121,7 @@ class Landing extends Component {
             onClickHandler={this.next}
           />
         </Carousel>
-        <div style={{ textAlign: 'center' }}>
+        <div style={{ textAlign: 'center', marginTop:'-5px'}}>
           <Jumbotron>
             <h1 className="display-3">Let us Currate!</h1>
             <p className="lead">

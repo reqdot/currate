@@ -12,8 +12,8 @@ class Header extends Component {
       case false:
         return (
           <div>
-            <Button outline color="success">
-              <Link to="/signin/signinForm">Login with ID</Link>
+            <Button outline color="info">
+              <Link id="loginLink" to="/signin/signinForm">Login with ID</Link>
             </Button>
             <div className="divider" />
             <a href="/auth/google">
@@ -56,7 +56,7 @@ class Header extends Component {
       <div className="container">
         <Navbar color="faded" light expand="md">
           <NavbarBrand>
-            <Link to="/">
+            <Link to="/" style={{textDecoration:'none'}}>
               <h1>Currate</h1>
             </Link>
           </NavbarBrand>

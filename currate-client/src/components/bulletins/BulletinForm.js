@@ -18,7 +18,7 @@ class BulletinForm extends Component {
           name={name}
           component={({ input, meta: { error, touched } }) => {
             return (
-              <div>
+              <div style={{ marginLeft: '370px', marginTop: '50px'}}>
                 <label style={{ fontSize: 'large' }}>{label}</label>
                 <hr style={{ marginTop: '5px' }} />
                 <Input
@@ -53,7 +53,7 @@ class BulletinForm extends Component {
           <Button
             outline
             color="danger"
-            style={{ float: 'left' }}
+            style={{ marginTop: '-38px', marginLeft: '380px' }}
             onClick={deleteBulletin(this.props.bulletins._id)}
           >
             Delete!
@@ -70,7 +70,7 @@ class BulletinForm extends Component {
           style={{
             width: '80%',
             marginLeft: '110px',
-            marginTop: '30px'
+            marginTop: '5px'
           }}
         >
           <CardBody
@@ -98,22 +98,22 @@ class BulletinForm extends Component {
                 <a
                   style={{
                     fontSize: 'large',
-                    marginRight: '500px'
+                    marginLeft: '370px'
                   }}
                   href="/bulletins"
                 >
                   Back to the list!
                 </a>
                 <div style={{ marginLeft: '590px', marginTop: '-10px' }}>
-                  {this.renderButton()}
+                <Button
+                  color="primary"
+                  type="submit"
+                  style={{ float: 'right' }}
+                >
+                  Next!
+                </Button>
                   &nbsp; &nbsp;
-                  <Button
-                    color="primary"
-                    type="submit"
-                    style={{ float: 'right' }}
-                  >
-                    Next!
-                  </Button>
+                {this.renderButton()}
                 </div>
               </form>
             </div>
@@ -135,12 +135,8 @@ function validate(values) {
   return errors;
 }
 
-function mapStateToProps({ bulletins }) {
-  console.log(bulletins);
-  return { bulletins };
-}
 
-BulletinForm = connect(mapStateToProps, actions)(BulletinForm);
+BulletinForm = connect(null, actions)(BulletinForm);
 
 export default reduxForm({
   validate,

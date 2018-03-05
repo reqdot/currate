@@ -3,24 +3,24 @@ const mongoose = require('mongoose');
 const ObjectId = mongoose.Types.ObjectId;
 const requireLogin = require('../middlewares/requireLogin');
 
+var Bulletin = mongoose.model('bulletins');
 
-const Bulletin = mongoose.model('bulletins');
 module.exports = app => {
-  app.get('/api/bulletins', requireLogin, async(req, res) => {
-    const bulletins = await Bulletin.find();
+  app.get('/api/bulletins', async(req, res) => {
+    var bulletins = await Bulletin.find();
     res.send(bulletins);
   });
 
   app.get('/api/bulletins/new/:id', async (req, res) => {
-    const id = req.params.id;
-    const bulletin = await Bulletin.findById(new ObjectId(id));
+    var id = req.params.id;
+    var bulletin = await Bulletin.findById(new ObjectId(id));
     res.send(bulletin);
   });
 
   app.patch('/api/bulletins/new/:id', async (req, res) => {
-    const id = req.params.id;
-    const date = req.body.date;
-    const body = _.pick(req.body, ['title', 'content']);
+    var id = req.params.id;
+    var date = req.body.date;
+    var body = _.pick(req.body, ['title', 'content']);
 
     const updatedBulletin = await Bulletin.findByIdAndUpdate(
       { _id: new ObjectId(id)},
@@ -31,17 +31,19 @@ module.exports = app => {
   });
 
   app.delete('/api/bulletins/new/:id', async (req, res) => {
-    const id = req.params.id;
-    const deleteBulletin = await Bulletin.findByIdAndRemove(new ObjectId(id));
+    var id = req.params.id;
+    var deleteBulletin = await Bulletin.findByIdAndRemove(new ObjectId(id));
     res.send(deleteBulletin);
   });
 
-  app.post('/api/bulletins', requireLogin, (req, res) => {
-    const { title, content, date } = req.body;
-    const bulletin = new Bulletin({
+  app.post('/api/bulletins/:id', (req, res) => {
+    var id = req.params.id;
+    console.log(id)
+    var { title, content, date } = req.body;
+    var bulletin = new Bulletin({
       title,
       content,
-      _user: req.user.id,
+      _user: id,
       date: Date.now()
     });
 

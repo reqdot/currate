@@ -44,10 +44,10 @@ class CrawlerForm extends Component {
           <Card body outline color="grey">
             <br />
             News URL :&nbsp;&nbsp;
-            <a href={result.url}>{result.url}</a>
+            <a href={result.url} target="_blank" style={{textDecoration:'none'}}>{result.url}</a>
             <br />
             &nbsp;&nbsp;
-            <span className="blockquote">{result.description}</span>
+            <span className="blockquote" style={{fontSize:'medium'}}>{result.description}</span>
             <br />
           </Card>
           <br />
@@ -74,9 +74,9 @@ class CrawlerForm extends Component {
               className="input-group"
               style={{
                 width: '75%',
-                paddingLeft: '20px',
+                paddingLeft: '200px',
                 paddingRight: '100px',
-                marginLeft: '-50px'
+                marginLeft: '88px'
               }}
             >
               <Input
@@ -89,7 +89,7 @@ class CrawlerForm extends Component {
                 placeholder="e.g. currency exchange rate"
                 onChange={this.handleChange}
               />
-              <span className="input-group-btn">
+              <span className="input-group-btn" >
                 <Button
                   color="primary"
                   type="submit"

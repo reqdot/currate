@@ -1,16 +1,19 @@
+import _ from 'lodash';
+
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { fetchBulletins } from '../../actions';
+import * as actions from '../../actions';
 import { Card, CardText, CardColumns, Button } from 'reactstrap';
 import '../../css/BulletinList.css';
 
 class BulletinList extends Component {
+
   componentDidMount() {
     this.props.fetchBulletins();
   }
 
   renderBulletins() {
-    return this.props.bulletins.reverse().map(bulletin => {
+    return _.map(this.props.bulletins, (bulletin) => {
       return (
         <div className="container" key={bulletin.date}>
           <Card
@@ -43,7 +46,7 @@ class BulletinList extends Component {
           <hr style={{ marginTop: '1px' }} />
         </div>
       );
-    });
+    }).reverse()
   }
   render() {
     return (
@@ -60,8 +63,10 @@ class BulletinList extends Component {
     );
   }
 }
-function mapStateToProps({ bulletins }) {
-  return { bulletins };
+function mapStateToProps(state) {
+  return {
+    bulletins: state.bulletins,
+  };
 }
 
-export default connect(mapStateToProps, { fetchBulletins })(BulletinList);
+export default connect(mapStateToProps, actions)(BulletinList);

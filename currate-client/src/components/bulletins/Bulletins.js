@@ -16,7 +16,7 @@ class Bulletins extends Component {
               style={{
                 float: 'right',
                 marginTop: '30px',
-                marginRight: '20px',
+                marginRight: '32px',
                 marginBottom: '40px'
               }}
             >

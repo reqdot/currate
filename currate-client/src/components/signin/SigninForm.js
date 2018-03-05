@@ -52,6 +52,7 @@ class SigninForm extends Component {
       email: '',
       password: ''
     });
+    this.props.history.push("/");
   }
   render() {
     const { submitting } = this.props;
@@ -83,7 +84,7 @@ class SigninForm extends Component {
               Sign in and Share your opinions!
             </CardTitle>
 
-            <div style={{ marginTop: '-30px' }}>
+            <div style={{ marginLeft: '370px', marginTop: '30px' }}>
               <form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
                 {this.renderFields()}
 
@@ -104,7 +105,7 @@ class SigninForm extends Component {
                 <Button
                   outline
                   color="success"
-                  style={{ marginTop: '5px', marginLeft: '396px' }}
+                  style={{ marginTop: '5px', marginLeft: '25px' }}
                 >
                   Sign up!
                 </Button>

@@ -65,7 +65,7 @@ class SignupForm extends Component {
           style={{
             width: '80%',
             marginLeft: '110px',
-            marginTop: '30px'
+            marginTop: '35px'
           }}
         >
           <CardBody
@@ -85,7 +85,7 @@ class SignupForm extends Component {
               Be a Currater! Join our trip!
             </CardTitle>
 
-            <div style={{ marginTop: '-30px' }}>
+            <div style={{ marginLeft: '370px', marginTop: '20px'}}>
               <form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
                 {this.renderFields()}
 
@@ -100,7 +100,7 @@ class SignupForm extends Component {
               </form>
 
               <Link to="/signin/signinform">
-                <Button outline color="success" style={{ marginLeft: '395px' }}>
+                <Button outline color="success" style={{ marginLeft: '25px' }}>
                   Login!
                 </Button>
               </Link>

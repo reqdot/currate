@@ -3,3 +3,11 @@
   height: auto;
   display: inline-block;
 }
+
+#loginLink {
+  text-decoration: none;
+}
+
+#loginLink:hover{
+  color:white;
+}
