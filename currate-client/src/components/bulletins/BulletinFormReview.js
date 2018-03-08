@@ -1,6 +1,7 @@
 import _ from 'lodash';
 import React from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 import bulletinFieldsData from './bulletinFieldsData';
 import { withRouter } from 'react-router-dom';
 import * as actions from '../../actions';
@@ -63,16 +64,17 @@ const BulletinFormReview = ({
               Back
             </Button>
             &nbsp; &nbsp;
+            <Link to="/bulletins">
             <Button
               color="primary"
               onClick={
                 id
-                  ? () => updateBulletin(id, formValues)
-                  : () => submitBulletin(userId, formValues)
-              }
+                ? () => updateBulletin(id, formValues)
+                : () => submitBulletin(userId, formValues)}
             >
               Save Your Weblog!
               </Button>
+              </Link>
           </div>
         </CardBody>
       </Card>

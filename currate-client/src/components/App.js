@@ -60,8 +60,11 @@ class App extends Component {
           <Route exact path="/" component={Landing} />
           <Route path="/signup/signupform" component={SignupForm} />
           <Route path="/signin/signinform" component={SigninForm} />
-          <Route exact path="/bulletins" render={() =>
-                    (this.checkSignin ? <Bulletins /> : <SigninForm />) } />
+          <Route exact path="/bulletins" render={() => (
+                    (this.state.isSignedIn || this.props.auth) ?
+                                  (<Bulletins />) :
+                                  (<SigninForm />)
+                )} />
           <Route exact path="/bulletins/new" render={() => (
                     (this.state.isSignedIn || this.props.auth) ?
                                   (<BulletinNew />) :

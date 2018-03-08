@@ -60,7 +60,7 @@ class SigninForm extends Component {
 
   render() {
     const { submitting } = this.props;
-    const { from } = this.props.location.state || '/'
+    const { from } = this.props.location || '/'
     const { fireRedirect } = this.state;
 
     return (

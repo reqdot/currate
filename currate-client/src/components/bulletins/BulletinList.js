@@ -11,7 +11,10 @@ class BulletinList extends Component {
     this.props.fetchBulletins();
   }
 
+
   renderBulletins() {
+    const userId = JSON.stringify(JSON.parse(localStorage.getItem('token')).data._id).substring(1, 25);
+
     return _.map(this.props.bulletins, (bulletin) => {
       return (
         <div className="container" key={bulletin.date}>
@@ -45,6 +48,7 @@ class BulletinList extends Component {
       );
     }).reverse()
   }
+
   render() {
     return (
       <div>
@@ -63,6 +67,7 @@ class BulletinList extends Component {
 function mapStateToProps(state) {
   return {
     bulletins: state.bulletins,
+    auth: state.auth
   };
 }
 
