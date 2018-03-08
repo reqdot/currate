@@ -2,6 +2,7 @@ import bulletinFieldsData from './bulletinFieldsData';
 import _ from 'lodash';
 import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { deleteBulletin } from '../../actions';
 import * as actions from '../../actions';
@@ -50,6 +51,7 @@ class BulletinForm extends Component {
     if (this.props.bulletins._id) {
       return (
         <div>
+        <Link to={'/bulletins'}>
           <Button
             outline
             color="danger"
@@ -58,6 +60,7 @@ class BulletinForm extends Component {
           >
             Delete!
           </Button>
+          </Link>
         </div>
       );
     }

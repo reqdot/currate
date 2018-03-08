@@ -32,11 +32,28 @@ export const signupUser = userInfo => async dispatch => {
 export const signinUser = userInfo => async dispatch => {
   console.log('action signinuser:', userInfo);
   const res = await axios.post('/api/users/signin', userInfo);
+  localStorage.setItem('token', JSON.stringify(res));
   dispatch({
     type: FETCH_USER,
     payload: res.data
   });
 };
+
+export const signoutUser = () => async dispatch => {
+  const res = await axios.get('/api/signout')
+  dispatch({
+    type: FETCH_USER,
+    payload: res.data
+  })
+}
+
+export const signoutUser2 = () => async dispatch => {
+  const res = await axios.delete('/api/users/me/signout')
+  dispatch({
+    type: FETCH_USER,
+    payload: res.data
+  })
+}
 
 export const fetchUrl = url => async dispatch => {
   const res = await axios.get(`/api/crawler?url=${url}`);
@@ -46,10 +63,8 @@ export const fetchUrl = url => async dispatch => {
   });
 };
 
-export const submitBulletin = (values, history) => async dispatch => {
-  const res = await axios.post('/api/bulletins/', values);
-
-  history.push('/bulletins');
+export const submitBulletin = (userId, values) => async dispatch => {
+  const res = await axios.post(`/api/bulletins/new/${userId}`, values);
   dispatch({ type: FETCH_BULLETINS, payload: res.data });
 };
 
@@ -65,12 +80,9 @@ export const fetchBulletin = id => async dispatch => {
 
 export const updateBulletin = (id, values) => async dispatch => {
   const res = await axios.patch(`/api/bulletins/new/${id}`, values);
-  window.location.href = '/bulletins';
   dispatch({ type: FETCH_BULLETINS, payload: res.data });
 };
 
 export const deleteBulletin = id => async dispatch => {
-  const res = await axios.delete(`/api/bulletins/new/${id}`, id);
-  window.location.href = '/bulletins';
-  dispatch({ type: FETCH_BULLETINS, payload: res.data });
+  await axios.delete(`/api/bulletins/new/${id}`, id);
 };

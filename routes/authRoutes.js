@@ -29,23 +29,22 @@ module.exports = app => {
         return user.generateAuthToken();
       })
       .then(token => {
-        res.header('x-auth', token).send(user);
+        res.cookie('token', token).send(user);
       })
       .catch(e => {
         res.status(400).send(e);
       });
   });
 
-  const authenticate = (req, res, next) => {
-    var token = req.header('x-auth');
-
+  var authenticate = (req, res, next) => {
+    var token = req.session.token;
+    console.log('authenticate token: ', token)
     User.findByToken(token)
       .then(user => {
         if (!user) {
           return Promise.reject();
         }
-        req.user = user;
-        req.token = token;
+        req.session.user = user;
         next();
       })
       .catch(e => {
@@ -54,7 +53,8 @@ module.exports = app => {
   };
 
   app.get('/api/users/me', authenticate, (req, res) => {
-    res.send(req.user);
+    console.log('/api/users/me req.user: ', req.session.user)
+    res.send(req.session.user);
   });
 
   app.post('/api/users/signin', (req, res) => {
@@ -62,7 +62,9 @@ module.exports = app => {
     User.findByCredentials(body.email, body.password)
       .then(user => {
         return user.generateAuthToken().then(token => {
-          res.header('x-auth', token).send(user);
+        req.session.token = token;
+        console.log('login req.session.token: ', token)
+        res.send(user);
         });
       })
       .catch(e => {
@@ -70,10 +72,10 @@ module.exports = app => {
       });
   });
 
-  app.delete('/api/users/me/token', authenticate, (req, res) => {
+  app.delete('/api/users/me/signout', authenticate, (req, res) => {
     req.user.removeToken(req.token).then(
       () => {
-        res.status(200).send();
+        res.status(200).send()
       },
       () => {
         res.status(400).send();
@@ -85,8 +87,9 @@ module.exports = app => {
     res.send(req.user);
   });
 
-  app.get('/api/logout', (req, res) => {
+  app.get('/api/signout', (req, res) => {
     req.logout();
+    req.session = null;
     res.redirect('/');
-  });
-};
+})
+}

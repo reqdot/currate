@@ -8,7 +8,9 @@ import BulletinFormReview from './BulletinFormReview';
 class BulletinNew extends Component {
   constructor(props) {
     super(props);
-    this.state = { review: false };
+    this.state = {
+      review: false
+    };
   }
 
   componentDidMount() {

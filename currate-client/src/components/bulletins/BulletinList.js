@@ -1,13 +1,12 @@
 import _ from 'lodash';
-
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { Card, CardText, CardColumns, Button } from 'reactstrap';
 import '../../css/BulletinList.css';
 
 class BulletinList extends Component {
-
   componentDidMount() {
     this.props.fetchBulletins();
   }
@@ -18,9 +17,7 @@ class BulletinList extends Component {
         <div className="container" key={bulletin.date}>
           <Card
             header
-            className={
-              bulletin.title.length % 2 === 0 ? 'bg-info' : 'bg-secondary'
-            }
+            className='bg-info'
             style={{ textAlign: 'left', color: 'white', opacity: '0.7' }}
           >
             &nbsp;&nbsp;{bulletin.title}
@@ -39,9 +36,9 @@ class BulletinList extends Component {
                 Date: {new Date(bulletin.date).toLocaleDateString()}
               </p>
             </CardText>
-            <a href={`/bulletins/new/${bulletin._id}`}>
+            <Link to={`/bulletins/new/${bulletin._id}`}>
               <Button style={{ float: 'right' }}>Modify</Button>
-            </a>
+            </Link>
           </Card>
           <hr style={{ marginTop: '1px' }} />
         </div>

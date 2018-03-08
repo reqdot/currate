@@ -5,6 +5,7 @@ import React, { Component } from 'react';
 import { reduxForm, Field } from 'redux-form';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import { Redirect } from 'react-router';
 import { signinUser } from '../../actions';
 
 import { Card, CardBody, CardTitle, Button } from 'reactstrap';
@@ -15,7 +16,8 @@ class SigninForm extends Component {
 
     this.state = {
       email: '',
-      password: ''
+      password: '',
+      fireRedirect: false
     };
 
     this.onInputChange = this.onInputChange.bind(this);
@@ -43,6 +45,7 @@ class SigninForm extends Component {
       );
     });
   }
+
   onFormSubmit(event) {
     this.props.signinUser({
       email: this.state.email,
@@ -50,12 +53,15 @@ class SigninForm extends Component {
     });
     this.setState({
       email: '',
-      password: ''
+      password: '',
+      fireRedirect: true
     });
-    this.props.history.push("/");
   }
+
   render() {
     const { submitting } = this.props;
+    const { from } = this.props.location.state || '/'
+    const { fireRedirect } = this.state;
 
     return (
       <div>
@@ -87,7 +93,6 @@ class SigninForm extends Component {
             <div style={{ marginLeft: '370px', marginTop: '30px' }}>
               <form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
                 {this.renderFields()}
-
                 <Button
                   color="primary"
                   type="submit"
@@ -101,6 +106,9 @@ class SigninForm extends Component {
                   Sign in!
                 </Button>
               </form>
+              {fireRedirect && (
+                <Redirect to={from || '/'} />
+              )}
               <Link to="/signup/signupform">
                 <Button
                   outline

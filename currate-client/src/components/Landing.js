@@ -11,6 +11,7 @@ import currate2 from '../images/currate2.jpg';
 import currate4 from '../images/currate4.jpeg';
 import currate5 from '../images/currate5.jpg';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import Footer from './footer';
 import '../css/Landing.css';
 
@@ -37,7 +38,9 @@ const items = [
 class Landing extends Component {
   constructor(props) {
     super(props);
-    this.state = { activeIndex: 0 };
+    this.state = {
+      activeIndex: 0
+     };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
     this.goToIndex = this.goToIndex.bind(this);
@@ -74,6 +77,18 @@ class Landing extends Component {
   goToIndex(newIndex) {
     if (this.animating) return;
     this.setState({ activeIndex: newIndex });
+  }
+
+  renderButton() {
+    if(!this.props.auth) {
+      return (
+      <p className="lead">
+        <Link to="/signup/signupform">
+          <Button color="primary">Join Currate!</Button>
+        </Link>
+      </p>
+    )
+    }
   }
 
   render() {
@@ -137,11 +152,7 @@ class Landing extends Component {
               You can chat with other Currater, and crawl the News, and mark
               your Weblogs.
             </p>
-            <p className="lead">
-              <Link to="/signup/signupform">
-                <Button color="primary">Join Currate!</Button>
-              </Link>
-            </p>
+            {this.renderButton()}
           </Jumbotron>
         </div>
         <Footer />
@@ -150,4 +161,8 @@ class Landing extends Component {
   }
 }
 
-export default Landing;
+function mapStateToProps({auth}) {
+  return {auth};
+}
+
+export default connect(mapStateToProps)(Landing);

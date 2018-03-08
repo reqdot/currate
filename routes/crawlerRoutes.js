@@ -9,7 +9,7 @@ let host = 'api.cognitive.microsoft.com';
 let path = '/bing/v7.0/news/search';
 
 module.exports = app => {
-  app.get('/api/crawler', requireLogin, (req, res) => {
+   app.get('/api/crawler', requireLogin, (req, res) => {
     console.log('routes url:', req.query.url);
     let term = req.query.url;
 

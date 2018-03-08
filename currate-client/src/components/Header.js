@@ -1,56 +1,65 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import * as actions from '../actions'
 import { Navbar, NavbarBrand, Nav, NavItem, Button } from 'reactstrap';
 import '../css/Header.css';
 
 class Header extends Component {
+  constructor(props) {
+    super(props)
+
+    this.removeLocalStorage = this.removeLocalStorage.bind(this)
+  }
+
+  removeLocalStorage() {
+    localStorage.removeItem('token');
+  }
+
   renderContent() {
-    switch (this.props.auth) {
-      case null:
-        return 'still deciding';
-      case false:
-        return (
-          <div>
-            <Button outline color="info">
-              <Link id="loginLink" to="/signin/signinForm">Login with ID</Link>
+    if(localStorage.getItem('token')||this.props.auth) {
+      return (
+        <div>
+          <Link to="/bulletins">
+            <Button outline color="secondary">
+              Weblogs
             </Button>
-            <div className="divider" />
-            <a href="/auth/google">
-              <Button outline color="success">
-                Login with Google
-              </Button>
+          </Link>
+          <div className="divider" />
+          <Link to="/crawler">
+            <Button outline color="secondary">
+              Crawler
+            </Button>
+          </Link>
+          <div className="divider" />
+          <Link to="/chats">
+            <Button color="danger">Chats</Button>
+          </Link>
+          <div className="divider" />
+          <a href="/api/signout">
+            <Button outline color="secondary" onClick={this.removeLocalStorage}>
+              Logout
+            </Button>
             </a>
-          </div>
-        );
-      default:
-        return (
-          <div>
-            <Link to="/bulletins">
-              <Button outline color="secondary">
-                Weblogs
-              </Button>
-            </Link>
-            <div className="divider" />
-            <Link to="/crawler">
-              <Button outline color="secondary">
-                Crawler
-              </Button>
-            </Link>
-            <div className="divider" />
-            <Link to="/chats">
-              <Button color="danger">Chats</Button>
-            </Link>
-            <div className="divider" />
-            <a href="/api/logout">
-              <Button outline color="secondary">
-                Logout
-              </Button>
-            </a>
-          </div>
-        );
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <Button outline color="info">
+            <Link id="loginLink" to="/signin/signinForm">Login with ID</Link>
+          </Button>
+          <div className="divider" />
+          <a href="/auth/google">
+            <Button outline color="success">
+              Login with Google
+            </Button>
+          </a>
+        </div>
+      );
     }
   }
+
   render() {
     return (
       <div className="container">
@@ -74,4 +83,4 @@ function mapStateToProps({ auth }) {
   return { auth };
 }
 
-export default connect(mapStateToProps)(Header);
+export default connect(mapStateToProps, actions)(Header);

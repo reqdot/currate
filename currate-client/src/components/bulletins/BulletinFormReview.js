@@ -10,9 +10,9 @@ const BulletinFormReview = ({
   onCancel,
   formValues,
   id,
+  userId,
   submitBulletin,
-  updateBulletin,
-  history
+  updateBulletin
 }) => {
   const reviewFields = _.map(bulletinFieldsData, ({ name, label }) => {
     return (
@@ -24,6 +24,11 @@ const BulletinFormReview = ({
       </div>
     );
   });
+
+  if(!userId) {
+    const value = JSON.stringify(JSON.parse(localStorage.getItem('token')).data._id)
+    userId = value.substring(1, 25);
+  }
 
   return (
     <div>
@@ -63,11 +68,11 @@ const BulletinFormReview = ({
               onClick={
                 id
                   ? () => updateBulletin(id, formValues)
-                  : () => submitBulletin(formValues, history)
+                  : () => submitBulletin(userId, formValues)
               }
             >
               Save Your Weblog!
-            </Button>
+              </Button>
           </div>
         </CardBody>
       </Card>
@@ -76,10 +81,11 @@ const BulletinFormReview = ({
 };
 
 function mapStateToProps(state) {
-  console.log(state);
+  console.log('state: ', state);
   return {
     formValues: state.form.bulletinForm.values,
-    id: state.bulletins._id
+    id: state.bulletins._id,
+    userId: state.auth._id
   };
 }
 
