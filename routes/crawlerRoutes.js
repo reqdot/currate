@@ -1,53 +1,37 @@
-const _ = require('lodash');
-let https = require('https');
-const mongoose = require('mongoose');
-const request = require('request');
-const cheerio = require('cheerio');
+let client = require('cheerio-httpcli');
 const requireLogin = require('../middlewares/requireLogin');
-let subscriptionKey = '00f1ca2222b24c96a3023a955cd9f6fb';
-let host = 'api.cognitive.microsoft.com';
-let path = '/bing/v7.0/news/search';
 
 module.exports = app => {
-   app.get('/api/crawler', requireLogin, (req, res) => {
-    console.log('routes url:', req.query.url);
-    let term = req.query.url;
+  app.get('/api/crawler', requireLogin, (req, res) => {
+    console.log('routes url:', req.query.terms);
+    let untrimmedKeywordList = req.query.terms;
+    let trimmedKeywordList = [];
+    trimmedKeywordList = untrimmedKeywordList.split(',').trim();
+    console.log('trimmedKeywordList: ', trimmedKeywordList);
 
-    let response_handler = function(response) {
-      let body = '';
-      response.on('data', function(d) {
-        body += d;
-      });
-      response.on('end', function() {
-        console.log('\nRelevant Headers:\n');
-
-        for (var header in response.headers)
-          if (header.startsWith('bingapis-') || header.startsWith('x-msedge-'))
-            console.log(header + ': ' + response.headers[header]);
-        body = JSON.stringify(JSON.parse(body), null, '  ');
-        console.log('\nJSON Response:\n');
-        console.log(body);
-        res.send(body);
-      });
-      response.on('error', function(e) {
-        console.log('Error: ' + e.message);
-      });
-    };
-
-    let bing_news_search = function(search) {
-      console.log('Searching news for: ' + term);
-      let request_params = {
-        method: 'GET',
-        hostname: host,
-        path: path + '?q=' + encodeURIComponent(search),
-        headers: {
-          'Ocp-Apim-Subscription-Key': subscriptionKey
+    let printHttpResponse = (word) => client.fetch(
+      "http://www.google.com/search",
+      {q:word},
+      (err, $, res, body) => {
+        let aList = $("div.rc").find(".r").find("a");
+        let description = $("div.rc").find(".s").find(".st");
+        for(let i = 0 ; i < aList.length ; i++) {
+          console.log($(aList[i]).text());
+          console.log($(aList[i]).attr('href'));
+          console.log($(description[i]).text());
         }
-      };
 
-      let req = https.request(request_params, response_handler);
-      req.end();
-    };
-    bing_news_search(term);
-  });
-};
+      }
+    )
+
+  //   let keywordList = [
+  //     "신사역 맛집",
+  //     "교대역 맛집",
+  //     "약수역 맛집"
+  //   ]
+  //
+  //   for(let keyword of keywordList) {
+  //     printHttpResponse(keyword);
+  //   }
+  // })
+})}

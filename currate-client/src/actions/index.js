@@ -55,8 +55,8 @@ export const signoutUser2 = () => async dispatch => {
   })
 }
 
-export const fetchUrl = url => async dispatch => {
-  const res = await axios.get(`/api/crawler?url=${url}`);
+export const fetchUrl = terms => async dispatch => {
+  const res = await axios.get(`/api/crawler?terms=${terms}`);
   dispatch({
     type: FETCH_URL,
     payload: res.data
