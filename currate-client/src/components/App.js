@@ -16,40 +16,17 @@ class App extends Component {
   constructor(props) {
     super(props);
 
-    let isSignedIn = false;
-    let userId = '';
+    this.state = {
+      isSignedIn: ''
+    }
 
     this.props.fetchUser();
+    this.props.fetchUser2();
 
-  try {
-    isSignedIn = localStorage.getItem('token');
-    if(!userId) {
-      const value = JSON.stringify(JSON.parse(isSignedIn).data._id)
-      userId = value.substring(1, 25);
+    if(!this.state.isSignedIn) {
+      this.setState({isSignedIn : localStorage.getItem('token')});
     }
-  } catch (exception) {
-
-  }
-
-    this.state  = {
-      userId
-    };
-
-    this.checkSignin = this.checkSignin.bind(this);
 }
-
-  checkSignin(userId, isSignedIn) {
-    if(userId) {
-      this.setState({
-        userId
-      });
-      localStorage.setItem('token', JSON.stringify(isSignedIn))
-      return true;
-    } else {
-      return false;
-    }
-    }
-
 
   render() {
     return (
@@ -57,9 +34,9 @@ class App extends Component {
         <Switch>
          <div className="container">
           <Route component={Header} />
-          <Route exact path="/" component={Landing} />
-          <Route path="/signup/signupform" component={SignupForm} />
-          <Route path="/signin/signinform" component={SigninForm} />
+          <Route exact path="/" render={() => <Landing />} />
+          <Route path="/signup/signupform" render={() => <SignupForm />} />
+          <Route path="/signin/signinform" render={() => <SigninForm />} />
           <Route exact path="/bulletins" render={() => (
                     (this.state.isSignedIn || this.props.auth) ?
                                   (<Bulletins />) :

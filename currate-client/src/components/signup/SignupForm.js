@@ -47,8 +47,7 @@ class SignupForm extends Component {
   onFormSubmit(event) {
     this.props.signupUser({
       email: this.state.email,
-      password: this.state.password,
-      confirmPassword: this.state.confirmPassword
+      password: this.state.password
     });
     this.setState({
       email: '',

@@ -28,7 +28,6 @@ class ChatsForm extends Component {
       this.setState({ key: this.state.key + 1 });
 
       this.setState({ messages: [...this.state.messages, data] });
-      console.log(this.state.messages);
     };
 
     this.sendMessage = e => {

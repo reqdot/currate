@@ -20,7 +20,6 @@ export const fetchUser2 = () => async dispatch => {
 };
 
 export const signupUser = userInfo => async dispatch => {
-  console.log('action user:', userInfo);
   const res = await axios.post('/api/users', userInfo);
   window.location.href = '/signin/signinform';
   dispatch({
@@ -30,7 +29,6 @@ export const signupUser = userInfo => async dispatch => {
 };
 
 export const signinUser = userInfo => async dispatch => {
-  console.log('action signinuser:', userInfo);
   const res = await axios.post('/api/users/signin', userInfo);
   localStorage.setItem('token', JSON.stringify(res));
   dispatch({
@@ -41,14 +39,6 @@ export const signinUser = userInfo => async dispatch => {
 
 export const signoutUser = () => async dispatch => {
   const res = await axios.get('/api/signout')
-  dispatch({
-    type: FETCH_USER,
-    payload: res.data
-  })
-}
-
-export const signoutUser2 = () => async dispatch => {
-  const res = await axios.delete('/api/users/me/signout')
   dispatch({
     type: FETCH_USER,
     payload: res.data

@@ -1,37 +1,31 @@
+const _ = require('lodash');
 let client = require('cheerio-httpcli');
 const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
   app.get('/api/crawler', requireLogin, (req, res) => {
-    console.log('routes url:', req.query.terms);
     let untrimmedKeywordList = req.query.terms;
-    let trimmedKeywordList = [];
-    trimmedKeywordList = untrimmedKeywordList.split(',').trim();
-    console.log('trimmedKeywordList: ', trimmedKeywordList);
+    let trimmedKeywordList = _.map(untrimmedKeywordList.split(','), term => term.trim());
+    let keywords = trimmedKeywordList.toString();
 
     let printHttpResponse = (word) => client.fetch(
       "http://www.google.com/search",
       {q:word},
-      (err, $, res, body) => {
-        let aList = $("div.rc").find(".r").find("a");
-        let description = $("div.rc").find(".s").find(".st");
-        for(let i = 0 ; i < aList.length ; i++) {
-          console.log($(aList[i]).text());
-          console.log($(aList[i]).attr('href'));
-          console.log($(description[i]).text());
-        }
-
-      }
+      (err, $, response, body) => {
+            let aList = $("div.rc").find(".r").find("a");
+            let summary = $("div.rc").find(".s").find(".st");
+            var resultList = [];
+            for(let i = 0 ; i < aList.length ; i++) {
+              var result = {"name": "", "url": "", "description": ""}
+              result["name"] = $(aList[i]).text();
+              result["url"] = $(aList[i]).attr('href');
+              result["description"] = $(summary[i]).text();
+              resultList.push(result);
+            }
+            res.send(resultList);
+          }
     )
-
-  //   let keywordList = [
-  //     "신사역 맛집",
-  //     "교대역 맛집",
-  //     "약수역 맛집"
-  //   ]
-  //
-  //   for(let keyword of keywordList) {
-  //     printHttpResponse(keyword);
-  //   }
-  // })
-})}
+      printHttpResponse(keywords);
+  }
+)
+}

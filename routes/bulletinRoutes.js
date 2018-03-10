@@ -38,7 +38,6 @@ module.exports = app => {
 
   app.post('/api/bulletins/new/:id', requireLogin, (req, res) => {
     var id = req.params.id;
-    console.log(id);
     var { title, content, date } = req.body;
     var bulletin = new Bulletin({
       title,

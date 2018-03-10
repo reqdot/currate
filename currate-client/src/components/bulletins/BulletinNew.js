@@ -15,8 +15,6 @@ class BulletinNew extends Component {
 
   componentDidMount() {
     const id = document.location.href.split('/');
-    console.log(id);
-
     this.props.fetchBulletin(id[5]);
   }
   renderContent() {
@@ -38,7 +36,6 @@ class BulletinNew extends Component {
 }
 
 function mapStateToProps({ bulletins }) {
-  console.log(bulletins);
   return { bulletins };
 }
 

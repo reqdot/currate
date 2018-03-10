@@ -83,7 +83,6 @@ const BulletinFormReview = ({
 };
 
 function mapStateToProps(state) {
-  console.log('state: ', state);
   return {
     formValues: state.form.bulletinForm.values,
     id: state.bulletins._id,

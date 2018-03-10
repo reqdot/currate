@@ -98,15 +98,15 @@ class BulletinForm extends Component {
                 onSubmit={this.props.handleSubmit(this.props.onBulletinSubmit)}
               >
                 {this.renderFields()}
-                <a
+                <Link
                   style={{
                     fontSize: 'large',
                     marginLeft: '370px'
                   }}
-                  href="/bulletins"
+                  to="/bulletins"
                 >
                   Back to the list!
-                </a>
+                </Link>
                 <div style={{ marginLeft: '590px', marginTop: '-10px' }}>
                 <Button
                   color="primary"
@@ -138,8 +138,11 @@ function validate(values) {
   return errors;
 }
 
+function mapStateToProps(state) {
+  auth: state.auth
+}
 
-BulletinForm = connect(null, actions)(BulletinForm);
+BulletinForm = connect(mapStateToProps, actions)(BulletinForm);
 
 export default reduxForm({
   validate,

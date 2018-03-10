@@ -22,13 +22,12 @@ class CrawlerForm extends Component {
   }
 
   handleSubmit(e) {
-    console.log(this.state.value);
     this.props.fetchUrl(this.state.value);
     e.preventDefault();
   }
 
   renderResults() {
-    return _.map(this.props.crawlerResults.value, result => {
+    return _.map(this.props.crawlerResults, result => {
       return (
         <div
           style={{ width: '90%', marginLeft: '55px', paddingTop: '8px' }}

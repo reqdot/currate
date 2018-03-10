@@ -37,8 +37,6 @@ require('./routes/bulletinRoutes')(app);
 require('./routes/crawlerRoutes')(app);
 
 io.on('connection', socket => {
-  console.log(socket.id);
-
   socket.on('SEND_MESSAGE', function(data) {
     io.emit('RECEIVE_MESSAGE', data);
   });
