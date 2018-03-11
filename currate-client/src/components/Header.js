@@ -27,6 +27,10 @@ class Header extends Component {
     if(localStorage.getItem('token')||this.props.auth) {
       return (
         <div>
+        <span style={{ color: 'grey'}}>
+        {this.props.auth.email}
+        </span>
+        , Welcome! &nbsp;
           <Link to="/bulletins">
             <Button outline color="secondary">
               Weblogs
