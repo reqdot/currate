@@ -12,8 +12,15 @@ class Header extends Component {
     this.removeLocalStorage = this.removeLocalStorage.bind(this)
   }
 
+
   removeLocalStorage() {
     localStorage.removeItem('token');
+  }
+
+  componentDidMount() {
+    if(!localStorage.getItem('token')) {
+    localStorage.removeItem('token');
+    }
   }
 
   renderContent() {

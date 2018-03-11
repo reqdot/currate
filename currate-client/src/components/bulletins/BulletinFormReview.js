@@ -27,7 +27,7 @@ const BulletinFormReview = ({
   });
 
   if(!userId) {
-    const value = JSON.stringify(JSON.parse(localStorage.getItem('token')).data._id)
+    var value = JSON.stringify(JSON.parse(localStorage.getItem('token')).data._user);
     userId = value.substring(1, 25);
   }
 

@@ -138,11 +138,7 @@ function validate(values) {
   return errors;
 }
 
-function mapStateToProps(state) {
-  auth: state.auth
-}
-
-BulletinForm = connect(mapStateToProps, actions)(BulletinForm);
+BulletinForm = connect(null, actions)(BulletinForm);
 
 export default reduxForm({
   validate,

@@ -7,9 +7,33 @@ import { Card, CardText, CardColumns, Button } from 'reactstrap';
 import '../../css/BulletinList.css';
 
 class BulletinList extends Component {
+  constructor(props) {
+    super(props);
+
+    this.renderButton = this.renderButton.bind(this);
+  }
+
   componentDidMount() {
     this.props.fetchBulletins();
   }
+
+  renderButton(user, id) {
+    if (user === this.props.auth._id) {
+    return(
+    <Link to={`/bulletins/new/${id}`} >
+    <Button style={{ marginTop: '-13px', float: 'right' }}>
+     Modify
+    </Button>
+    </Link>
+  )
+} else {
+  return(
+    <div>
+    <br />
+    </div>
+  )
+}
+}
 
   renderBulletins() {
     return _.map(this.props.bulletins, (bulletin) => {
@@ -17,7 +41,7 @@ class BulletinList extends Component {
         <div className="container" key={bulletin.date}>
           <Card
             header
-            className='bg-info'
+            className={bulletin.title.length % 2 === 0 ? 'bg-info' : 'bg-primary'}
             style={{ textAlign: 'left', color: 'white', opacity: '0.7' }}
           >
             &nbsp;&nbsp;{bulletin.title}
@@ -36,9 +60,7 @@ class BulletinList extends Component {
                 Date: {new Date(bulletin.date).toLocaleDateString()}
               </p>
             </CardText>
-            <Link to={`/bulletins/new/${bulletin._id}`}>
-              <Button style={{ float: 'right' }}>Modify</Button>
-            </Link>
+            {this.renderButton(bulletin._user, bulletin._id)}
           </Card>
           <hr style={{ marginTop: '1px' }} />
         </div>
@@ -61,6 +83,7 @@ class BulletinList extends Component {
     );
   }
 }
+
 function mapStateToProps(state) {
   return {
     bulletins: state.bulletins,

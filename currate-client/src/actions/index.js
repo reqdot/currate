@@ -60,6 +60,7 @@ export const submitBulletin = (userId, values) => async dispatch => {
 
 export const fetchBulletins = () => async dispatch => {
   const res = await axios.get('/api/bulletins');
+  localStorage.setItem('token', JSON.stringify(res));
   dispatch({ type: FETCH_BULLETINS, payload: res.data });
 };
 

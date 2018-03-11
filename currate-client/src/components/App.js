@@ -23,11 +23,11 @@ class App extends Component {
     this.props.fetchUser();
     this.props.fetchUser2();
 
-    if(!this.state.isSignedIn) {
-      this.setState({isSignedIn : localStorage.getItem('token')});
-    }
 }
 
+  componentDidMount() {
+
+  }
   render() {
     return (
       <BrowserRouter>
@@ -48,9 +48,9 @@ class App extends Component {
                                   (<SigninForm />)
                 )} />
           <Route path='/bulletins/new/:userId' render={() => (
-                    (this.state.isSignedIn || this.props.auth) ?
+                    (this.state.isSignedIn || this.props.auth._id) ?
                             (<BulletinNew />) :
-                            (<SigninForm />)
+                            (<Bulletins />)
                 )} />
           <Route path="/chats" render={() => (
             (this.state.isSignedIn || this.props.auth) ?
