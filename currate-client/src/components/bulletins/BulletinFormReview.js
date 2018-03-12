@@ -26,8 +26,10 @@ const BulletinFormReview = ({
     );
   });
 
-  if(!userId) {
-    var value = JSON.stringify(JSON.parse(localStorage.getItem('token')).data._user);
+  if (!userId) {
+    var value = JSON.stringify(
+      JSON.parse(localStorage.getItem('token')).data._user
+    );
     userId = value.substring(1, 25);
   }
 
@@ -65,16 +67,17 @@ const BulletinFormReview = ({
             </Button>
             &nbsp; &nbsp;
             <Link to="/bulletins">
-            <Button
-              color="primary"
-              onClick={
-                id
-                ? () => updateBulletin(id, formValues)
-                : () => submitBulletin(userId, formValues)}
-            >
-              Save Your Weblog!
+              <Button
+                color="primary"
+                onClick={
+                  id
+                    ? () => updateBulletin(id, formValues)
+                    : () => submitBulletin(userId, formValues)
+                }
+              >
+                Save Your Weblog!
               </Button>
-              </Link>
+            </Link>
           </div>
         </CardBody>
       </Card>

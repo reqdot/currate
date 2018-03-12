@@ -10,7 +10,7 @@ import { Card, CardBody, CardTitle, Input, Button } from 'reactstrap';
 
 class BulletinForm extends Component {
   renderFields() {
-      return _.map(bulletinFieldsData, ({ label, name }) => {
+    return _.map(bulletinFieldsData, ({ label, name }) => {
       return (
         <Field
           key={name}
@@ -19,7 +19,7 @@ class BulletinForm extends Component {
           name={name}
           component={({ input, meta: { error, touched } }) => {
             return (
-              <div style={{ marginLeft: '370px', marginTop: '50px'}}>
+              <div style={{ marginLeft: '370px', marginTop: '50px' }}>
                 <label style={{ fontSize: 'large' }}>{label}</label>
                 <hr style={{ marginTop: '5px' }} />
                 <Input
@@ -51,15 +51,15 @@ class BulletinForm extends Component {
     if (this.props.bulletins._id) {
       return (
         <div>
-        <Link to={'/bulletins'}>
-          <Button
-            outline
-            color="danger"
-            style={{ marginTop: '-38px', marginLeft: '380px' }}
-            onClick={deleteBulletin(this.props.bulletins._id)}
-          >
-            Delete!
-          </Button>
+          <Link to={'/bulletins'}>
+            <Button
+              outline
+              color="danger"
+              style={{ marginTop: '-38px', marginLeft: '380px' }}
+              onClick={deleteBulletin(this.props.bulletins._id)}
+            >
+              Delete!
+            </Button>
           </Link>
         </div>
       );
@@ -108,15 +108,15 @@ class BulletinForm extends Component {
                   Back to the list!
                 </Link>
                 <div style={{ marginLeft: '590px', marginTop: '-10px' }}>
-                <Button
-                  color="primary"
-                  type="submit"
-                  style={{ float: 'right' }}
-                >
-                  Next!
-                </Button>
+                  <Button
+                    color="primary"
+                    type="submit"
+                    style={{ float: 'right' }}
+                  >
+                    Next!
+                  </Button>
                   &nbsp; &nbsp;
-                {this.renderButton()}
+                  {this.renderButton()}
                 </div>
               </form>
             </div>

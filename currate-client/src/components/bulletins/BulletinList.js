@@ -19,29 +19,27 @@ class BulletinList extends Component {
 
   renderButton(user, id) {
     if (user === this.props.auth._id) {
-    return(
-    <Link to={`/bulletins/new/${id}`} >
-    <Button style={{ marginTop: '-13px', float: 'right' }}>
-     Modify
-    </Button>
-    </Link>
-  )
-} else {
-  return(
-    <div>
-    <br />
-    </div>
-  )
-}
-}
+      return (
+        <Link to={`/bulletins/new/${id}`}>
+          <Button style={{ marginTop: '-13px', float: 'right' }}>Modify</Button>
+        </Link>
+      );
+    } else {
+      return (
+        <div>
+          <br />
+        </div>
+      );
+    }
+  }
 
   renderBulletins() {
-    return _.map(this.props.bulletins, (bulletin) => {
+    return _.map(this.props.bulletins, bulletin => {
       return (
         <div className="container" key={bulletin.date}>
           <Card
             header
-            className={bulletin.title.length % 2 === 0 ? 'bg-info' : 'bg-primary'}
+            className="bg-primary"
             style={{ textAlign: 'left', color: 'white', opacity: '0.7' }}
           >
             &nbsp;&nbsp;{bulletin.title}
@@ -62,10 +60,10 @@ class BulletinList extends Component {
             </CardText>
             {this.renderButton(bulletin._user, bulletin._id)}
           </Card>
-          <hr style={{ marginTop: '1px' }} />
+          <hr style={{ marginTop: '-0.6px' }} />
         </div>
       );
-    }).reverse()
+    }).reverse();
   }
 
   render() {
@@ -77,7 +75,7 @@ class BulletinList extends Component {
           {this.renderBulletins()}
         </CardColumns>
         <div id="topButton">
-          <a href="#top">TOP</a>
+          <a href="#top">t▲p</a>
         </div>
       </div>
     );

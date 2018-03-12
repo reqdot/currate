@@ -60,7 +60,7 @@ class SigninForm extends Component {
 
   render() {
     const { submitting } = this.props;
-    const { from } = this.props.location || '/'
+    const { from } = this.props.location || '/';
     const { fireRedirect } = this.state;
 
     return (
@@ -106,9 +106,7 @@ class SigninForm extends Component {
                   Sign in!
                 </Button>
               </form>
-              {fireRedirect && (
-                <Redirect to={from || '/'} />
-              )}
+              {fireRedirect && <Redirect to={from || '/'} />}
               <Link to="/signup/signupform">
                 <Button
                   outline

@@ -1,36 +1,42 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
-import * as actions from '../actions'
+import * as actions from '../actions';
 import { Navbar, NavbarBrand, Nav, NavItem, Button } from 'reactstrap';
 import '../css/Header.css';
 
 class Header extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
-    this.removeLocalStorage = this.removeLocalStorage.bind(this)
+    this.removeLocalStorage = this.removeLocalStorage.bind(this);
+    localStorage.removeItem('token');
   }
-
 
   removeLocalStorage() {
     localStorage.removeItem('token');
   }
 
-  componentDidMount() {
-    if(!localStorage.getItem('token')) {
-    localStorage.removeItem('token');
-    }
-  }
-
   renderContent() {
-    if(localStorage.getItem('token')||this.props.auth) {
+    if (localStorage.getItem('token') || this.props.auth) {
       return (
         <div>
-        <span style={{ color: 'grey'}}>
-        {this.props.auth.email}
-        </span>
-        , Welcome! &nbsp;
+          Welcome,&nbsp;
+          <span style={{ color: 'grey' }}>{this.props.auth.email}</span>!
+          <div className="divider" />
+          <Button
+            color="secondary"
+            onClick={() =>
+              window.open(
+                '/crawler',
+                '_blank',
+                'width=1000,height=400,left=175,top=175'
+              )
+            }
+          >
+            Crawling Results
+          </Button>
+          <div className="divider" />
           <Link to="/bulletins">
             <Button outline color="secondary">
               Weblogs
@@ -47,18 +53,21 @@ class Header extends Component {
             <Button color="danger">Chats</Button>
           </Link>
           <div className="divider" />
+          &nbsp;
           <a href="/api/signout">
             <Button outline color="secondary" onClick={this.removeLocalStorage}>
               Logout
             </Button>
-            </a>
+          </a>
         </div>
       );
     } else {
       return (
         <div>
           <Button outline color="info">
-            <Link id="loginLink" to="/signin/signinForm">Login with ID</Link>
+            <Link id="loginLink" to="/signin/signinForm">
+              Login with ID
+            </Link>
           </Button>
           <div className="divider" />
           <a href="/auth/google">
@@ -76,7 +85,7 @@ class Header extends Component {
       <div className="container">
         <Navbar color="faded" light expand="md">
           <NavbarBrand>
-            <Link to="/" style={{textDecoration:'none'}}>
+            <Link to="/" style={{ textDecoration: 'none' }}>
               <h1>Currate</h1>
             </Link>
           </NavbarBrand>

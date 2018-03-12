@@ -6,7 +6,7 @@ const requireLogin = require('../middlewares/requireLogin');
 var Bulletin = mongoose.model('bulletins');
 
 module.exports = app => {
-  app.get('/api/bulletins', requireLogin, async(req, res) => {
+  app.get('/api/bulletins', requireLogin, async (req, res) => {
     var bulletins = await Bulletin.find();
     res.send(bulletins);
   });
@@ -23,7 +23,7 @@ module.exports = app => {
     var body = _.pick(req.body, ['title', 'content']);
 
     const updatedBulletin = await Bulletin.findByIdAndUpdate(
-      { _id: new ObjectId(id)},
+      { _id: new ObjectId(id) },
       { $set: body, date: Date.now() },
       { new: true }
     );
@@ -42,7 +42,7 @@ module.exports = app => {
     var bulletin = new Bulletin({
       title,
       content,
-      _user: id,
+      _user: ObjectId(id),
       date: Date.now()
     });
 

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Input } from 'reactstrap';
 
-export default ({ input, label, type,  meta: { error, touched } }) => {
+export default ({ input, label, type, meta: { error, touched } }) => {
   console.log(type);
   return (
     <div>

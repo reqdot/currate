@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import { fetchUrl } from '../../actions';
+import { submitNews } from '../../actions';
+import { deleteNews } from '../../actions';
+import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import { Card, Form, Button, Input } from 'reactstrap';
 import _ from 'lodash';
@@ -11,8 +14,10 @@ class CrawlerForm extends Component {
     this.state = {
       value: ''
     };
+    this.props.fetchNewsList();
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.renderButton = this.renderButton.bind(this);
   }
 
   handleChange(e) {
@@ -26,33 +31,115 @@ class CrawlerForm extends Component {
     e.preventDefault();
   }
 
+  renderButton(user, id) {
+    if (user === this.props.auth._id) {
+      return (
+        <div>
+          <Button
+            outline
+            color="secondary"
+            style={{ width: '10%', marginLeft: '90%' }}
+            onClick={deleteNews(id)}
+          >
+            Delete
+          </Button>
+        </div>
+      );
+    } else {
+      return (
+        <div>
+          <br />
+        </div>
+      );
+    }
+  }
+
   renderResults() {
     return _.map(this.props.crawlerResults, result => {
       return (
         <div
           style={{ width: '90%', marginLeft: '55px', paddingTop: '8px' }}
-          key={result.name}
+          key={result.title}
         >
           <Card
             header
             className="bg-info"
             style={{ textAlign: 'left', color: 'white', opacity: '0.7' }}
           >
-            &nbsp;&nbsp;&nbsp;{result.name}
+            &nbsp;&nbsp;&nbsp;{result.title}
           </Card>
           <Card body outline color="grey">
             <br />
             News URL :&nbsp;&nbsp;
-            <a href={result.url} target="_blank" style={{textDecoration:'none'}}>{result.url}</a>
+            <a
+              href={result.url}
+              target="_blank"
+              style={{ textDecoration: 'none' }}
+            >
+              {result.url}
+            </a>
             <br />
             &nbsp;&nbsp;
-            <span className="blockquote" style={{fontSize:'medium'}}>{result.description}</span>
+            <span className="blockquote" style={{ fontSize: 'medium' }}>
+              {result.description}
+            </span>
             <br />
+            <Button
+              outline
+              color="primary"
+              style={{ width: '30%', marginLeft: '70%' }}
+              onClick={submitNews(this.props.auth._id, {
+                title: result.title,
+                url: result.url,
+                description: result.description
+              })}
+            >
+              Save this news!
+            </Button>
           </Card>
           <br />
         </div>
       );
     });
+  }
+
+  renderNews() {
+    return _.map(this.props.news, result => {
+      return (
+        <div
+          style={{ width: '90%', marginLeft: '55px', paddingTop: '8px' }}
+          key={result.title}
+        >
+          <Card
+            header
+            className="bg-info"
+            style={{ textAlign: 'left', color: 'white', opacity: '0.7' }}
+          >
+            &nbsp;&nbsp;&nbsp;{result.title}&nbsp;&nbsp;( Search Date :&nbsp;{
+              result.date
+            }&nbsp;)
+          </Card>
+          <Card body outline color="grey">
+            <br />
+            News URL :&nbsp;&nbsp;
+            <a
+              href={result.url}
+              target="_blank"
+              style={{ textDecoration: 'none' }}
+            >
+              {result.url}
+            </a>
+            <br />
+            &nbsp;&nbsp;
+            <span className="blockquote" style={{ fontSize: 'medium' }}>
+              {result.description}
+            </span>
+            <hr />
+            {this.renderButton(result._user, result._id)}
+          </Card>
+        </div>
+      );
+    }).reverse();
   }
 
   render() {
@@ -88,7 +175,7 @@ class CrawlerForm extends Component {
                 placeholder="e.g. currency exchange rate"
                 onChange={this.handleChange}
               />
-              <span className="input-group-btn" >
+              <span className="input-group-btn">
                 <Button
                   color="primary"
                   type="submit"
@@ -113,8 +200,18 @@ class CrawlerForm extends Component {
           </span>
           <hr style={{ width: '90%', paddingRight: '10px' }} />
           <div>{this.renderResults()}</div>
+          <div
+            style={{
+              marginTop: '40px',
+              textAlign: 'center',
+              color: 'darkgrey'
+            }}
+          >
+            <h4> You can catch other Curraters News below!</h4>
+          </div>
+          <div>{this.renderNews()}</div>
           <div id="topButton">
-            <a href="#top">TOP</a>
+            <a href="#top">t▲p</a>
           </div>
         </div>
       </div>
@@ -122,9 +219,12 @@ class CrawlerForm extends Component {
   }
 }
 
-function mapStateToProps({ crawlerResults }) {
-  return { crawlerResults };
+function mapStateToProps(state) {
+  return {
+    auth: state.auth,
+    news: state.news,
+    crawlerResults: state.crawlerResults
+  };
 }
 
-
-export default connect(mapStateToProps, { fetchUrl })(CrawlerForm);
+export default connect(mapStateToProps, actions)(CrawlerForm);

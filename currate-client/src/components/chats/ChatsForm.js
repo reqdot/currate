@@ -127,7 +127,7 @@ class ChatsForm extends Component {
             </div>
           </div>
           <div id="topButton">
-            <a href="#top">TOP</a>
+            <a href="#top">t▲p</a>
           </div>
         </div>
       </div>

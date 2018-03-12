@@ -18,52 +18,77 @@ class App extends Component {
 
     this.state = {
       isSignedIn: ''
-    }
+    };
 
     this.props.fetchUser();
     this.props.fetchUser2();
-
-}
-
+  }
 
   render() {
     return (
       <BrowserRouter>
         <Switch>
-         <div className="container">
-          <Route component={Header} />
-          <Route exact path="/" render={() => <Landing />} />
-          <Route path="/signup/signupform" render={() => <SignupForm />} />
-          <Route path="/signin/signinform" render={() => <SigninForm />} />
-          <Route exact path="/bulletins" render={() => (
-                    (this.state.isSignedIn || this.props.auth) ?
-                                  (<Bulletins />) :
-                                  (<SigninForm />)
-                )} />
-          <Route exact path="/bulletins/new" render={() => (
-                    (this.state.isSignedIn || this.props.auth) ?
-                                  (<BulletinNew />) :
-                                  (<SigninForm />)
-                )} />
-          <Route path='/bulletins/new/:userId' render={() => (
-                    (this.state.isSignedIn || this.props.auth._id) ?
-                            (<BulletinNew />) :
-                            (<Bulletins />)
-                )} />
-          <Route path="/chats" render={() => (
-            (this.state.isSignedIn || this.props.auth) ?
-                          (<ChatsForm />) :
-                          (<SigninForm />)
-                 )} />
-          <Route path="/crawler" render={() => (
-            (this.state.isSignedIn || this.props.auth) ?
-                          (<CrawlerForm />) :
-                          (<SigninForm />)
-                 )} />
-        </div>
-      </Switch>
-    </BrowserRouter>
-
+          <div className="container">
+            <Route component={Header} />
+            <Route exact path="/" render={() => <Landing />} />
+            <Route path="/signup/signupform" render={() => <SignupForm />} />
+            <Route path="/signin/signinform" render={() => <SigninForm />} />
+            <Route
+              exact
+              path="/bulletins"
+              render={() =>
+                this.state.isSignedIn || this.props.auth ? (
+                  <Bulletins />
+                ) : (
+                  <SigninForm />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/bulletins/new"
+              render={() =>
+                this.state.isSignedIn || this.props.auth ? (
+                  <BulletinNew />
+                ) : (
+                  <SigninForm />
+                )
+              }
+            />
+            <Route
+              path="/bulletins/new/:userId"
+              render={() =>
+                this.state.isSignedIn || this.props.auth._id ? (
+                  <BulletinNew />
+                ) : (
+                  <Bulletins />
+                )
+              }
+            />
+            <Route
+              path="/chats"
+              render={() =>
+                this.state.isSignedIn || this.props.auth ? (
+                  <ChatsForm />
+                ) : (
+                  <SigninForm />
+                )
+              }
+            />
+            <Route
+              exact
+              path="/crawler"
+              render={() =>
+                this.state.isSignedIn || this.props.auth ? (
+                  <CrawlerForm />
+                ) : (
+                  <SigninForm />
+                )
+              }
+            />
+          </div>
+        </Switch>
+      </BrowserRouter>
     );
   }
 }
@@ -72,7 +97,7 @@ function mapStateToProps(state) {
   return {
     auth: state.auth,
     bulletins: state.bulletins
-}
+  };
 }
 
 export default connect(mapStateToProps, actions)(App);

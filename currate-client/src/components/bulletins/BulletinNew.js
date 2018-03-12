@@ -17,6 +17,7 @@ class BulletinNew extends Component {
     const id = document.location.href.split('/');
     this.props.fetchBulletin(id[5]);
   }
+
   renderContent() {
     if (this.state.review) {
       return (
@@ -30,6 +31,7 @@ class BulletinNew extends Component {
       />
     );
   }
+
   render() {
     return <div>{this.renderContent()}</div>;
   }

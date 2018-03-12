@@ -84,7 +84,7 @@ class SignupForm extends Component {
               Be a Currater! Join our trip!
             </CardTitle>
 
-            <div style={{ marginLeft: '370px', marginTop: '20px'}}>
+            <div style={{ marginLeft: '370px', marginTop: '20px' }}>
               <form onSubmit={this.props.handleSubmit(this.onFormSubmit)}>
                 {this.renderFields()}
 

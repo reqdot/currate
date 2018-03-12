@@ -19,6 +19,7 @@ mongoose.connect(keys.mongoURI);
 
 require('./models/User');
 require('./models/Bulletin');
+require('./models/News');
 require('./services/passport');
 
 app.use(bodyParser.urlencoded({ extended: true }));

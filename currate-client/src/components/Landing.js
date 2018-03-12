@@ -28,11 +28,12 @@ const items = [
     altText: 'Crawling the news!',
     caption: 'You can crawl and save the news!'
   },
-  { link: '/bulletins',
+  {
+    link: '/bulletins',
     src: currate4,
     altText: 'Mark your Weblogs!',
     caption: 'Contact other opinions!'
-}
+  }
 ];
 
 class Landing extends Component {
@@ -40,7 +41,7 @@ class Landing extends Component {
     super(props);
     this.state = {
       activeIndex: 0
-     };
+    };
     this.next = this.next.bind(this);
     this.previous = this.previous.bind(this);
     this.goToIndex = this.goToIndex.bind(this);
@@ -80,14 +81,14 @@ class Landing extends Component {
   }
 
   renderButton() {
-    if(!this.props.auth) {
+    if (!this.props.auth) {
       return (
-      <p className="lead">
-        <Link to="/signup/signupform">
-          <Button color="primary">Join Currate!</Button>
-        </Link>
-      </p>
-    )
+        <p className="lead">
+          <Link to="/signup/signupform">
+            <Button color="primary">Join Currate!</Button>
+          </Link>
+        </p>
+      );
     }
   }
 
@@ -113,7 +114,7 @@ class Landing extends Component {
     });
 
     return (
-      <div className="container" style={{marginTop: '15px'}}>
+      <div className="container" style={{ marginTop: '15px' }}>
         <Carousel
           activeIndex={activeIndex}
           next={this.next}
@@ -136,12 +137,12 @@ class Landing extends Component {
             onClickHandler={this.next}
           />
         </Carousel>
-        <div style={{ textAlign: 'center', marginTop:'-5px'}}>
+        <div style={{ textAlign: 'center', marginTop: '-5px' }}>
           <Jumbotron>
             <h1 className="display-3">Let us Currate!</h1>
             <p className="lead">
               <p>
-                You know, Currate is the WebLog to talk and discuss everything
+                You know, Currate is a Community to talk and discuss everything
                 related to world Economy & Business, and so on!
                 <br />
                 Feel free to analyze, anticipate and RATE all about ECONOMY!
@@ -149,8 +150,8 @@ class Landing extends Component {
             </p>
             <hr className="my-2" />
             <p>
-              You can chat with other Currater, and crawl the News, and mark
-              your Weblogs.
+              You can chat with other Currater, and crawl News, and mark your
+              Weblogs.
             </p>
             {this.renderButton()}
           </Jumbotron>
@@ -161,8 +162,8 @@ class Landing extends Component {
   }
 }
 
-function mapStateToProps({auth}) {
-  return {auth};
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default connect(mapStateToProps)(Landing);
