@@ -20,7 +20,7 @@ const items = [
     link: '/chats',
     src: currate2,
     altText: 'Discuss hot issues!',
-    caption: 'Chating with other Currater'
+    caption: 'Chat with other Currater'
   },
   {
     link: '/crawler',
@@ -32,7 +32,7 @@ const items = [
     link: '/bulletins',
     src: currate4,
     altText: 'Mark your Weblogs!',
-    caption: 'Contact other opinions!'
+    caption: 'Contact with other opinions!'
   }
 ];
 
