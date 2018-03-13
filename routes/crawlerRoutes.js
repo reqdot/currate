@@ -44,6 +44,12 @@ module.exports = app => {
     res.send(newsList);
   });
 
+  app.get('/api/crawler/news/:id', requireLogin, async (req, res) => {
+    var id = req.params.id;
+    var newsList = await News.find({_user: new ObjectId(id)});
+    res.send(newsList);
+  });
+
   app.delete('/api/crawler/news/:id', requireLogin, async (req, res) => {
     var id = req.params.id;
     var deleteNews = await News.findByIdAndRemove(new ObjectId(id));

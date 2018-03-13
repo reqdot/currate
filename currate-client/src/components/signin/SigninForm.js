@@ -46,7 +46,7 @@ class SigninForm extends Component {
     });
   }
 
-  onFormSubmit(event) {
+  onFormSubmit() {
     this.props.signinUser({
       email: this.state.email,
       password: this.state.password

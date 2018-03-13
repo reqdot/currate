@@ -1,8 +1,10 @@
 import axios from 'axios';
 import { FETCH_USER } from './types';
 import { FETCH_BULLETINS } from './types';
+import { FETCH_MY_BULLETINS } from './types';
 import { FETCH_URL } from './types';
 import { FETCH_NEWS } from './types';
+import { FETCH_MY_NEWS } from './types';
 
 export const fetchUser = () => async dispatch => {
   const res = await axios.get('/api/current_user');
@@ -46,6 +48,11 @@ export const signoutUser = () => async dispatch => {
   });
 };
 
+export const withdrawUser = id => async dispatch => {
+  await axios.delete(`/api/withdraw/${id}`, id);
+  window.location = '/';
+};
+
 export const fetchUrl = terms => async dispatch => {
   const res = await axios.get(`/api/crawler?terms=${terms}`);
   dispatch({
@@ -60,6 +67,12 @@ export const submitNews = (userId, values) => async dispatch => {
   dispatch({ type: FETCH_NEWS, payload: res.data });
 };
 
+export const submitMyNews = (userId, values) => async dispatch => {
+  const res = await axios.post(`/api/crawler/news/${userId}`, values);
+  window.location = '/crawler/mynews';
+  dispatch({ type: FETCH_NEWS, payload: res.data });
+};
+
 export const fetchNewsList = () => async dispatch => {
   const res = await axios.get('/api/crawler/news');
   dispatch({ type: FETCH_NEWS, payload: res.data });
@@ -68,7 +81,7 @@ export const fetchNewsList = () => async dispatch => {
 export const fetchNews = userId => async dispatch => {
   const res = await axios.get(`/api/crawler/news/${userId}`);
   dispatch({
-    type: FETCH_NEWS,
+    type: FETCH_MY_NEWS,
     payload: res.data
   });
 };
@@ -92,6 +105,11 @@ export const fetchBulletins = () => async dispatch => {
 export const fetchBulletin = id => async dispatch => {
   const res = await axios.get(`/api/bulletins/new/${id}`);
   dispatch({ type: FETCH_BULLETINS, payload: res.data });
+};
+
+export const fetchMyBulletins = userId => async dispatch => {
+  const res = await axios.get(`/api/bulletins/mybulletins/${userId}`);
+  dispatch({ type: FETCH_MY_BULLETINS, payload: res.data });
 };
 
 export const updateBulletin = (id, values) => async dispatch => {

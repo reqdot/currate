@@ -1,5 +1,6 @@
 const _ = require('lodash');
 const mongoose = require('mongoose');
+const ObjectId = mongoose.Types.ObjectId;
 const passport = require('passport');
 const requireLogin = require('../middlewares/requireLogin');
 
@@ -53,6 +54,12 @@ module.exports = app => {
 
   app.get('/api/users/me', authenticate, (req, res) => {
     res.send(req.session.user);
+  });
+
+  app.delete('/api/withdraw/:id', requireLogin, async(req, res) => {
+    var id = req.params.id;
+    var deleteUser = await User.findByIdAndRemove(new ObjectId(id));
+    res.send(deleteUser);
   });
 
   app.post('/api/users/signin', (req, res) => {

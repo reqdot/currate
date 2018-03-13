@@ -23,6 +23,25 @@ class Bulletins extends Component {
               ▦ Write New! Create new Weblogs!
             </Button>
           </Link>
+            <Button
+              outline
+              color="primary"
+              style={{
+                float: 'right',
+                marginTop: '30px',
+                marginRight: '5px',
+                marginBottom: '40px'
+              }}
+              onClick={() =>
+                window.open(
+                  '/bulletins/mybulletins',
+                  '_blank',
+                  'width=1000,height=400,left=175,top=175'
+                )
+              }
+            >
+              ＃ My Bulletins!
+            </Button>
         </div>
         <BulletinList />
       </div>

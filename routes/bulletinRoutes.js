@@ -17,6 +17,12 @@ module.exports = app => {
     res.send(bulletin);
   });
 
+  app.get('/api/bulletins/mybulletins/:id', requireLogin, async (req, res) => {
+    var id = req.params.id;
+    var bulletin = await Bulletin.find({_user: new ObjectId(id)});
+    res.send(bulletin);
+  });
+
   app.patch('/api/bulletins/new/:id', requireLogin, async (req, res) => {
     var id = req.params.id;
     var date = req.body.date;

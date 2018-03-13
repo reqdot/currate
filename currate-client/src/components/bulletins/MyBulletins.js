@@ -4,17 +4,17 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { Card, CardText, CardColumns, Button } from 'reactstrap';
-import '../../css/BulletinList.css';
+import '../../css/MyBulletins.css';
 
-class BulletinList extends Component {
+class MyBulletins extends Component {
   constructor(props) {
     super(props);
-    
+
     this.renderButton = this.renderButton.bind(this);
   }
 
   componentDidMount() {
-    this.props.fetchBulletins();
+    this.props.fetchMyBulletins(this.props.auth._id);
   }
 
   renderButton(user, id) {
@@ -34,7 +34,7 @@ class BulletinList extends Component {
   }
 
   renderBulletins() {
-    return _.map(this.props.bulletins, bulletin => {
+    return _.map(this.props.myBulletins, bulletin => {
       return (
         <div className="container" key={bulletin.date}>
           <Card
@@ -84,9 +84,9 @@ class BulletinList extends Component {
 
 function mapStateToProps(state) {
   return {
-    bulletins: state.bulletins,
+    myBulletins: state.myBulletins,
     auth: state.auth
   };
 }
 
-export default connect(mapStateToProps, actions)(BulletinList);
+export default connect(mapStateToProps, actions)(MyBulletins);

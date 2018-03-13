@@ -10,6 +10,7 @@ class Header extends Component {
     super(props);
 
     this.removeLocalStorage = this.removeLocalStorage.bind(this);
+
     localStorage.removeItem('token');
   }
 
@@ -22,13 +23,15 @@ class Header extends Component {
       return (
         <div>
           Welcome,&nbsp;
+          <Link to='/mypage'>
           <span style={{ color: 'grey' }}>{this.props.auth.email}</span>!
+          </Link>
           <div className="divider" />
           <Button
             color="secondary"
             onClick={() =>
               window.open(
-                '/crawler',
+                '/crawler/mynews',
                 '_blank',
                 'width=1000,height=400,left=175,top=175'
               )
