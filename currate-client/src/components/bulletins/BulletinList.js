@@ -4,12 +4,12 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as actions from '../../actions';
 import { Card, CardText, CardColumns, Button } from 'reactstrap';
-import '../../css/BulletinList.css';
+import '../../css/topButton.css';
 
 class BulletinList extends Component {
   constructor(props) {
     super(props);
-    
+
     this.renderButton = this.renderButton.bind(this);
   }
 
@@ -71,7 +71,7 @@ class BulletinList extends Component {
       <div>
         <br />
         <br />
-        <CardColumns className="container">
+        <CardColumns className="container" style={{ minWidth: '1080px' }}>
           {this.renderBulletins()}
         </CardColumns>
         <div id="topButton">

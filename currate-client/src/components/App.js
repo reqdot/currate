@@ -14,7 +14,7 @@ import MyNews from './crawler/MyNews';
 import SignupForm from './signup/SignupForm';
 import SigninForm from './signin/SigninForm';
 import MyPage from './mypage/MyPage';
-import Withdraw from './withdraw/Withdraw'
+import Withdraw from './withdraw/Withdraw';
 
 class App extends Component {
   constructor(props) {

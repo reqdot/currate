@@ -46,7 +46,7 @@ module.exports = app => {
 
   app.get('/api/crawler/news/:id', requireLogin, async (req, res) => {
     var id = req.params.id;
-    var newsList = await News.find({_user: new ObjectId(id)});
+    var newsList = await News.find({ _user: new ObjectId(id) });
     res.send(newsList);
   });
 

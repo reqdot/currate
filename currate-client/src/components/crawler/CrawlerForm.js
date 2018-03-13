@@ -6,15 +6,18 @@ import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import { Card, Form, Button, Input } from 'reactstrap';
 import _ from 'lodash';
-import '../../css/CrawlerForm.css';
+import '../../css/topButton.css';
 
 class CrawlerForm extends Component {
   constructor(props) {
     super(props);
+
     this.state = {
       value: ''
     };
+
     this.props.fetchNewsList();
+
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderButton = this.renderButton.bind(this);
@@ -144,7 +147,7 @@ class CrawlerForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container" style={{ minWidth: '1080px' }}>
         <div
           style={{
             marginTop: '40px',

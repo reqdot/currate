@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { Card, CardText, CardColumns, Button } from 'reactstrap';
 import _ from 'lodash';
-import '../../css/MyPage.css';
+import '../../css/topButton.css';
 
 class MyPage extends Component {
   constructor(props) {
@@ -135,7 +135,7 @@ class MyPage extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container" style={{ minWidth: '1080px' }}>
         <div
           style={{
             marginTop: '40px',
@@ -147,39 +147,41 @@ class MyPage extends Component {
           <br />
           You want to withdraw?&nbsp;&nbsp;
           <Link to="/withdraw">
-          <Button outline color="secondary">Withdraw</Button>
+            <Button outline color="secondary">
+              Withdraw
+            </Button>
           </Link>
         </div>
 
         <div
-            style={{
-              marginTop: '40px',
-              textAlign: 'center',
-              color: 'darkgrey'
-            }}
-          >
-            <h4> Here are your weblogs!</h4>
-          </div>
-          <br />
+          style={{
+            marginTop: '40px',
+            textAlign: 'center',
+            color: 'darkgrey'
+          }}
+        >
+          <h4> Here are your weblogs!</h4>
+        </div>
+        <br />
         <div>
-        <CardColumns className="container">
-          {this.renderBulletins()}
-        </CardColumns>
+          <CardColumns className="container" style={{ minWidth: '1080px' }}>
+            {this.renderBulletins()}
+          </CardColumns>
         </div>
         <div
-            style={{
-              marginTop: '40px',
-              textAlign: 'center',
-              color: 'darkgrey'
-            }}
-          >
-            <h4> Here are your crawling results!</h4>
-          </div>
-          <br />
-          <div>{this.renderNews()}</div>
-          <div id="topButton">
-            <a href="#top">t▲p</a>
-          </div>
+          style={{
+            marginTop: '40px',
+            textAlign: 'center',
+            color: 'darkgrey'
+          }}
+        >
+          <h4> Here are your crawling results!</h4>
+        </div>
+        <br />
+        <div>{this.renderNews()}</div>
+        <div id="topButton">
+          <a href="#top">t▲p</a>
+        </div>
       </div>
     );
   }

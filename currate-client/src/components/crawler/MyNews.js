@@ -6,7 +6,7 @@ import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import { Card, Form, Button, Input } from 'reactstrap';
 import _ from 'lodash';
-import '../../css/MyNews.css';
+import '../../css/topButton.css';
 
 class MyNews extends Component {
   constructor(props) {
@@ -147,7 +147,7 @@ class MyNews extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container" style={{ minWidth: '1080px' }}>
         <div
           style={{
             marginTop: '40px',

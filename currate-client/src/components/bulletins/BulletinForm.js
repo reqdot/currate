@@ -68,7 +68,7 @@ class BulletinForm extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container" style={{ minWidth: '1080px' }}>
         <Card
           style={{
             width: '80%',

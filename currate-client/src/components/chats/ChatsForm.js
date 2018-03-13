@@ -59,7 +59,6 @@ class ChatsForm extends Component {
         <div className="fixed">
           <div
             style={{
-              marginTop: '40px',
               marginLeft: '100px',
               textAlign: 'left',
               color: 'darkgrey'
@@ -100,35 +99,30 @@ class ChatsForm extends Component {
             </div>
           </div>
         </div>
-        <div className="absolute breakWord narrow">
-          <br />
-          <br />
-          <br />
-          <div>
-            <div className="MessageContainer">
-              <div className="MessagesList">
-                {this.state.messages.map(message => {
-                  return (
-                    <div id="chatList" key={message.key}>
-                      &nbsp;&nbsp;
-                      <h6 id="username">{message.username}:</h6>
-                      &nbsp;&nbsp;&nbsp;
-                      <span id="message"> {message.message}</span>
-                    </div>
-                  );
-                })}
-              </div>
-              <div
-                style={{ float: 'left', clear: 'both' }}
-                ref={el => {
-                  this.el = el;
-                }}
-              />
+        <div className="relative breakWord narrow">
+          <div className="MessageContainer">
+            <div className="MessagesList">
+              {this.state.messages.map(message => {
+                return (
+                  <div id="chatList" key={message.key}>
+                    &nbsp;&nbsp;
+                    <h6 id="username">{message.username}:</h6>
+                    &nbsp;&nbsp;&nbsp;
+                    <span id="message"> {message.message}</span>
+                  </div>
+                );
+              })}
             </div>
+            <div
+              style={{ float: 'left', clear: 'both' }}
+              ref={el => {
+                this.el = el;
+              }}
+            />
           </div>
-          <div id="topButton">
-            <a href="#top">t▲p</a>
-          </div>
+        </div>
+        <div id="topButton">
+          <a href="#top">t▲p</a>
         </div>
       </div>
     );

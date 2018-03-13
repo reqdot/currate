@@ -59,7 +59,7 @@ class SignupForm extends Component {
     const { submitting } = this.props;
 
     return (
-      <div>
+      <div className="container" style={{ minWidth: '1080px' }}>
         <Card
           style={{
             width: '80%',

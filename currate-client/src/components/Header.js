@@ -23,8 +23,8 @@ class Header extends Component {
       return (
         <div>
           Welcome,&nbsp;
-          <Link to='/mypage'>
-          <span style={{ color: 'grey' }}>{this.props.auth.email}</span>!
+          <Link to="/mypage">
+            <span style={{ color: 'grey' }}>{this.props.auth.email}</span>!
           </Link>
           <div className="divider" />
           <Button
@@ -59,7 +59,7 @@ class Header extends Component {
           &nbsp;
           <a href="/api/signout">
             <Button outline color="secondary" onClick={this.removeLocalStorage}>
-              Logout
+              Signout
             </Button>
           </a>
         </div>
@@ -85,7 +85,7 @@ class Header extends Component {
 
   render() {
     return (
-      <div className="container">
+      <div className="container" style={{ minWidth: '1080px' }}>
         <Navbar color="faded" light expand="md">
           <NavbarBrand>
             <Link to="/" style={{ textDecoration: 'none' }}>

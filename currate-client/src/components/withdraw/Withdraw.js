@@ -15,8 +15,8 @@ class Withdraw extends Component {
   }
 
   render() {
-      return (
-      <div>
+    return (
+      <div className="container" style={{ minWidth: '1080px' }}>
         <Card
           style={{
             width: '80%',
@@ -40,17 +40,17 @@ class Withdraw extends Component {
               }}
             >
               Do you really want to withdraw? :(
-              <br/ >
+              <br />
               If you click the button, you can withdraw.
-              </CardTitle>
-                <Button
-                  outline
-                  color="success"
-                  style={{ marginTop: '5px', marginLeft: '680px' }}
-                  onClick={this.handleClick}
-                >
-                  See you next time!
-                </Button>
+            </CardTitle>
+            <Button
+              outline
+              color="success"
+              style={{ marginTop: '5px', marginLeft: '680px' }}
+              onClick={this.handleClick}
+            >
+              See you next time!
+            </Button>
           </CardBody>
         </Card>
       </div>
@@ -58,8 +58,8 @@ class Withdraw extends Component {
   }
 }
 
-function mapStateToProps({auth}) {
-  return {auth};
+function mapStateToProps({ auth }) {
+  return { auth };
 }
 
 export default connect(mapStateToProps, actions)(Withdraw);

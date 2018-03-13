@@ -56,7 +56,7 @@ module.exports = app => {
     res.send(req.session.user);
   });
 
-  app.delete('/api/withdraw/:id', requireLogin, async(req, res) => {
+  app.delete('/api/withdraw/:id', requireLogin, async (req, res) => {
     var id = req.params.id;
     var deleteUser = await User.findByIdAndRemove(new ObjectId(id));
     res.send(deleteUser);

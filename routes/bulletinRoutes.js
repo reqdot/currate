@@ -19,7 +19,7 @@ module.exports = app => {
 
   app.get('/api/bulletins/mybulletins/:id', requireLogin, async (req, res) => {
     var id = req.params.id;
-    var bulletin = await Bulletin.find({_user: new ObjectId(id)});
+    var bulletin = await Bulletin.find({ _user: new ObjectId(id) });
     res.send(bulletin);
   });
 

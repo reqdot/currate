@@ -64,7 +64,7 @@ class SigninForm extends Component {
     const { fireRedirect } = this.state;
 
     return (
-      <div>
+      <div className="container" style={{ minWidth: '1080px' }}>
         <Card
           style={{
             width: '80%',

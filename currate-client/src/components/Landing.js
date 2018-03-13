@@ -114,7 +114,10 @@ class Landing extends Component {
     });
 
     return (
-      <div className="container" style={{ marginTop: '15px' }}>
+      <div
+        className="container"
+        style={{ marginTop: '15px', minWidth: '1080px' }}
+      >
         <Carousel
           activeIndex={activeIndex}
           next={this.next}
