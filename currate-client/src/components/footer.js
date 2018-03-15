@@ -3,7 +3,7 @@ import '../css/footer.css';
 
 export default () => {
   return (
-    <div className="container">
+    <div className="container" style={{ minWidth: '1080px' }}>
       <div className="footer">
         <div className="footerContainer">
           <p className="copyright">
