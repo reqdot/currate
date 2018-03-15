@@ -55,7 +55,7 @@ class BulletinForm extends Component {
             <Button
               outline
               color="danger"
-              style={{ marginTop: '-38px', marginLeft: '380px' }}
+              style={{ marginTop: '-38px', marginLeft: '355px' }}
               onClick={deleteBulletin(this.props.bulletins._id)}
             >
               Delete!

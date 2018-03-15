@@ -17,7 +17,7 @@ class MyNews extends Component {
     };
 
     this.props.fetchNews(this.props.auth._id);
-
+    console.log(this.props.auth._id);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderButton = this.renderButton.bind(this);
