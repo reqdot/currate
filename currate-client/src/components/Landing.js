@@ -146,7 +146,8 @@ class Landing extends Component {
             <p className="lead">
               <p>
                 You know, Currate is a Community to talk and discuss everything
-                related to world Economy & Business, and so on!
+                related to world Economy & Business, <br />
+                and so on!
                 <br />
                 Feel free to analyze, anticipate and RATE all about ECONOMY!
               </p>
