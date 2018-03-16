@@ -27,18 +27,11 @@ class Header extends Component {
             <span style={{ color: 'grey' }}>{this.props.auth.email}</span>!
           </Link>
           <div className="divider" />
-          <Button
-            color="secondary"
-            onClick={() =>
-              window.open(
-                '/crawler/mynews',
-                '_blank',
-                'width=1000,height=400,left=175,top=175'
-              )
-            }
-          >
-            Crawling Results
+          <Link to="/crawler/mynews">
+            <Button color="secondary">
+              Crawling Results
           </Button>
+          </Link>
           <div className="divider" />
           <Link to="/bulletins">
             <Button outline color="secondary">
