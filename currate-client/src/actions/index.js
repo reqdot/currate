@@ -91,6 +91,11 @@ export const deleteNews = id => async dispatch => {
   window.location = '/crawler';
 };
 
+export const deleteMyNews = id => async dispatch => {
+  await axios.delete(`/api/crawler/news/${id}`, id);
+  window.location = '/crawler/mynews';
+};
+
 export const submitBulletin = (userId, values) => async dispatch => {
   const res = await axios.post(`/api/bulletins/new/${userId}`, values);
   dispatch({ type: FETCH_BULLETINS, payload: res.data });

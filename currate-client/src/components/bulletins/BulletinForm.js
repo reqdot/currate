@@ -55,7 +55,11 @@ class BulletinForm extends Component {
             <Button
               outline
               color="danger"
-              style={{ marginTop: '-38px', marginLeft: '355px' }}
+              style={{
+                marginTop: '-24px',
+                marginRight: '6px',
+                float: 'right'
+              }}
               onClick={deleteBulletin(this.props.bulletins._id)}
             >
               Delete!
@@ -107,7 +111,12 @@ class BulletinForm extends Component {
                 >
                   Back to the list!
                 </Link>
-                <div style={{ marginLeft: '590px', marginTop: '-10px' }}>
+                <div
+                  style={{
+                    marginLeft: '590px',
+                    marginTop: '-10px'
+                  }}
+                >
                   <Button
                     color="primary"
                     type="submit"

@@ -44,6 +44,7 @@ class SignupForm extends Component {
       );
     });
   }
+
   onFormSubmit(event) {
     this.props.signupUser({
       email: this.state.email,
@@ -55,6 +56,7 @@ class SignupForm extends Component {
       confirmPassword: ''
     });
   }
+
   render() {
     const { submitting } = this.props;
 
@@ -136,6 +138,6 @@ function validate(values) {
 SignupForm = connect(null, { signupUser })(SignupForm);
 
 export default reduxForm({
-  form: 'singupForm',
+  form: 'signupForm',
   validate
 })(SignupForm);

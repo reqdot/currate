@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { fetchUrl } from '../../actions';
 import { submitMyNews } from '../../actions';
-import { deleteNews } from '../../actions';
+import { deleteMyNews } from '../../actions';
 import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import { Card, Form, Button, Input } from 'reactstrap';
@@ -16,8 +16,6 @@ class MyNews extends Component {
       value: ''
     };
 
-    this.props.fetchNews(this.props.auth._id);
-    console.log(this.props.auth._id);
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.renderButton = this.renderButton.bind(this);
@@ -42,7 +40,7 @@ class MyNews extends Component {
             outline
             color="secondary"
             style={{ width: '10%', marginLeft: '90%' }}
-            onClick={deleteNews(id)}
+            onClick={deleteMyNews(id)}
           >
             Delete
           </Button>
@@ -146,6 +144,8 @@ class MyNews extends Component {
   }
 
   render() {
+    this.props.fetchNews(this.props.auth._id);
+
     return (
       <div className="container" style={{ minWidth: '1080px' }}>
         <div
@@ -223,6 +223,7 @@ class MyNews extends Component {
 }
 
 function mapStateToProps(state) {
+  console.log(state.auth);
   return {
     auth: state.auth,
     myNews: state.myNews,

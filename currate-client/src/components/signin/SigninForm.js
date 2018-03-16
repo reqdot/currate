@@ -134,7 +134,7 @@ function validate(values) {
   if (!values.password) {
     errors.password = 'Required';
   } else if (values.password.length < 8) {
-    errors.password = 'Please enter the correct password';
+    errors.password = 'Please enter your correct password';
   }
 
   return errors;
