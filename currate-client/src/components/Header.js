@@ -28,9 +28,7 @@ class Header extends Component {
           </Link>
           <div className="divider" />
           <Link to="/crawler/mynews">
-            <Button color="secondary">
-              Crawling Results
-          </Button>
+            <Button color="secondary">Crawling Results</Button>
           </Link>
           <div className="divider" />
           <Link to="/bulletins">
