@@ -13,7 +13,7 @@ class BulletinList extends Component {
     this.renderButton = this.renderButton.bind(this);
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.props.fetchBulletins();
   }
 
@@ -49,17 +49,19 @@ class BulletinList extends Component {
             &nbsp;&nbsp;{bulletin.title}
           </Card>
           <Card body outline color="grey">
-            <CardText style={{ color: 'primary' }}>{bulletin.content}</CardText>
+          <CardText style={{ color: 'primary' }}>
+            <p className="blockquote">{bulletin.content}</p>
             <br />
-            <CardText
+            <p
               style={{
-                color: 'darkgrey',
                 textAlign: 'right',
+                color: 'darkgrey',
                 fontSize: 'medium'
               }}
             >
               Date: {new Date(bulletin.date).toLocaleDateString()}
-            </CardText>
+            </p>
+          </CardText>
             {this.renderButton(bulletin._user, bulletin._id)}
           </Card>
           <hr style={{ marginTop: '-0.6px' }} />
