@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { deleteNews } from '../../actions';
 import * as actions from '../../actions';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -17,48 +16,6 @@ class MyPage extends Component {
 
     this.props.fetchNews(this.props.auth._id);
     this.props.fetchMyBulletins(this.props.auth._id);
-
-    this.renderBulltinsButton = this.renderBulletinsButton.bind(this);
-    this.renderButton = this.renderButton.bind(this);
-  }
-
-  renderBulletinsButton(user, id) {
-    if (user === this.props.auth._id) {
-      return (
-        <Link to={`/bulletins/new/${id}`}>
-          <Button style={{ marginTop: '-13px', float: 'right' }}>Modify</Button>
-        </Link>
-      );
-    } else {
-      return (
-        <div>
-          <br />
-        </div>
-      );
-    }
-  }
-
-  renderButton(user, id) {
-    if (user === this.props.auth._id) {
-      return (
-        <div>
-          <Button
-            outline
-            color="secondary"
-            style={{ width: '10%', marginLeft: '90%' }}
-            onClick={deleteNews(id)}
-          >
-            Delete
-          </Button>
-        </div>
-      );
-    } else {
-      return (
-        <div>
-          <br />
-        </div>
-      );
-    }
   }
 
   renderBulletins() {
@@ -86,7 +43,6 @@ class MyPage extends Component {
                 Date: {new Date(bulletin.date).toLocaleDateString()}
               </p>
             </CardText>
-            {this.renderBulletinsButton(bulletin._user, bulletin._id)}
           </Card>
           <hr style={{ marginTop: '-0.6px' }} />
         </div>
@@ -125,8 +81,6 @@ class MyPage extends Component {
             <span className="blockquote" style={{ fontSize: 'medium' }}>
               {result.description}
             </span>
-            <hr />
-            {this.renderButton(result._user, result._id)}
           </Card>
         </div>
       );
