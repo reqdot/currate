@@ -25,7 +25,6 @@ class App extends Component {
     };
 
     this.props.fetchUser();
-    this.props.fetchUser2();
   }
 
   render() {
