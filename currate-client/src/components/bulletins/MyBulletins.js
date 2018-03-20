@@ -68,7 +68,16 @@ class MyBulletins extends Component {
 
   render() {
     return (
-      <div>
+      <div className="container" style={{ minWidth: '1080px' }}>
+        <div
+          style={{
+            marginTop: '40px',
+            textAlign: 'center',
+            color: 'darkgrey'
+          }}
+        >
+          <h4>You can see your bulletins here!</h4>
+        </div>
         <br />
         <br />
         <CardColumns className="container" style={{ minWidth: '1080px' }}>

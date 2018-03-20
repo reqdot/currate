@@ -223,7 +223,6 @@ class MyNews extends Component {
 }
 
 function mapStateToProps(state) {
-  console.log(state.auth);
   return {
     auth: state.auth,
     myNews: state.myNews,
