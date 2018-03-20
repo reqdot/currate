@@ -73,6 +73,9 @@ class BulletinList extends Component {
       <div>
         <br />
         <br />
+        <br />
+        <br />
+        <br />
         <CardColumns className="container" style={{ minWidth: '1080px' }}>
           {this.renderBulletins()}
         </CardColumns>
