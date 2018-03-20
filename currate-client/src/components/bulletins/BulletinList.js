@@ -13,7 +13,7 @@ class BulletinList extends Component {
     this.renderButton = this.renderButton.bind(this);
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.props.fetchBulletins();
   }
 

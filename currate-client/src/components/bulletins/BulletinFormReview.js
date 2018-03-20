@@ -66,7 +66,7 @@ const BulletinFormReview = ({
               Back
             </Button>
             &nbsp; &nbsp;
-            <Link to="/bulletins">
+            <Link to='/bulletins'>
               <Button
                 color="primary"
                 onClick={
