@@ -7,7 +7,7 @@ const requireLogin = require('../middlewares/requireLogin');
 var News = mongoose.model('news');
 
 module.exports = app => {
-  app.get('/api/crawler', requireLogin, (req, res) => {
+  app.get('/api/crawler', (req, res) => {
     let untrimmedKeywordList = req.query.terms;
     let trimmedKeywordList = _.map(untrimmedKeywordList.split(','), term =>
       term.trim()
