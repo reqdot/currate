@@ -2,7 +2,6 @@ import React from 'react';
 import { Input } from 'reactstrap';
 
 export default ({ input, label, type, meta: { error, touched } }) => {
-  console.log(type);
   return (
     <div>
       <label style={{ marginLeft: '22px', fontSize: 'large' }}>{label}</label>

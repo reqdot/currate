@@ -51,18 +51,20 @@ class BulletinForm extends Component {
     if (this.props.bulletins._id) {
       return (
         <div>
-          <Button
-            outline
-            color="danger"
-            style={{
-              marginTop: '-24px',
-              marginRight: '6px',
-              float: 'right'
-            }}
-            onClick={deleteBulletin(this.props.bulletins._id)}
-          >
-            Delete!
-          </Button>
+          <Link to="/bulletins">
+            <Button
+              outline
+              color="danger"
+              style={{
+                marginTop: '-24px',
+                marginRight: '6px',
+                float: 'right'
+              }}
+              onClick={deleteBulletin(this.props.bulletins._id)}
+            >
+              Delete!
+            </Button>
+          </Link>
         </div>
       );
     }

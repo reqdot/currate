@@ -124,5 +124,4 @@ export const updateBulletin = (id, values) => async dispatch => {
 
 export const deleteBulletin = id => async dispatch => {
   await axios.delete(`/api/bulletins/new/${id}`, id);
-  window.location = '/bulletins';
 };
