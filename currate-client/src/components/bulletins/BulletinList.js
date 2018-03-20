@@ -40,23 +40,25 @@ class BulletinList extends Component {
           <Card
             header
             className="bg-primary"
-            style={{ textAlign: 'left', color: 'white', opacity: '0.7' }}
+            style={{
+              textAlign: 'left',
+              color: 'white',
+              opacity: '0.7'
+            }}
           >
             &nbsp;&nbsp;{bulletin.title}
           </Card>
           <Card body outline color="grey">
-            <CardText style={{ color: 'primary' }}>
-              <p className="blockquote">{bulletin.content}</p>
-              <br />
-              <p
-                style={{
-                  textAlign: 'right',
-                  color: 'darkgrey',
-                  fontSize: 'medium'
-                }}
-              >
-                Date: {new Date(bulletin.date).toLocaleDateString()}
-              </p>
+            <CardText style={{ color: 'primary' }}>{bulletin.content}</CardText>
+            <br />
+            <CardText
+              style={{
+                color: 'darkgrey',
+                textAlign: 'right',
+                fontSize: 'medium'
+              }}
+            >
+              Date: {new Date(bulletin.date).toLocaleDateString()}
             </CardText>
             {this.renderButton(bulletin._user, bulletin._id)}
           </Card>
